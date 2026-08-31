@@ -1,0 +1,37 @@
+name: Weekly Iowa Liquor Sales Report
+
+on:
+  schedule:
+    # Runs 8:00 AM US Central on Fridays.
+    # NOTE: GitHub Actions cron is UTC and does not adjust for DST.
+    # 13:00 UTC = 8:00 AM CDT (summer). Change to 14:00 for CST (winter)
+    # if you want a fixed local time year-round, or leave as-is and accept
+    # the 1-hour shift twice a year.
+    - cron: "0 13 * * 5"
+  workflow_dispatch: {}   # lets you trigger it manually from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  run-report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run report script
+        run: python weekly_report.py
+
+      - name: Commit and push report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add reports/
+          git diff --staged --quiet || git commit -m "Weekly report $(date +'%Y-%m-%d')"
+          git push
