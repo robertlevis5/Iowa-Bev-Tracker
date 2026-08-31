@@ -19,6 +19,7 @@ import os
 import sys
 import urllib.parse
 import urllib.request
+import urllib.error
 import json
 
 # ---- Configuration -------------------------------------------------------
@@ -65,11 +66,26 @@ def fetch_rows(where_clause):
     url = DATASET_URL + "?" + urllib.parse.urlencode(params)
 
     req = urllib.request.Request(url)
+    # Socrata (and many public APIs) return 403 for requests with no/blank
+    # User-Agent, since that's a common bot fingerprint. Set a normal one.
+    req.add_header(
+        "User-Agent",
+        "Mozilla/5.0 (compatible; weekly-report-script/1.0; "
+        "+https://github.com/)",
+    )
+    req.add_header("Accept", "application/json")
     if APP_TOKEN:
         req.add_header("X-App-Token", APP_TOKEN)
 
-    with urllib.request.urlopen(req, timeout=60) as resp:
-        data = json.loads(resp.read().decode("utf-8"))
+    try:
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+    except urllib.error.HTTPError as e:
+        # Surface the response body -- Socrata usually includes a helpful
+        # JSON error message (e.g. bad column name) in the body.
+        body = e.read().decode("utf-8", errors="replace")
+        raise RuntimeError(f"HTTP {e.code} from Socrata API. Response body: {body}") from e
+
     return data
 
 
