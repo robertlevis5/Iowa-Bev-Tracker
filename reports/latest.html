@@ -7,13 +7,25 @@
 <style>
   body { font-family: Arial, sans-serif; margin: 2rem; color: #222; }
   h1 { font-size: 1.4rem; }
-  h2 { font-size: 1.1rem; margin-top: 2rem; }
+  h2 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; }
   .meta { color: #555; margin-bottom: 1.5rem; line-height: 1.6; }
   .note { color: #555; }
+  .summaries { display: flex; flex-wrap: wrap; gap: 2rem; }
+  .summary { flex: 1 1 340px; min-width: 0; }
+  .scroll { overflow-x: auto; }
   table { border-collapse: collapse; width: 100%; }
   th, td { border: 1px solid #ccc; padding: 6px 10px; font-size: 0.9rem; text-align: left; }
   th { background: #f2f2f2; }
+  tfoot td { font-weight: bold; background: #f2f2f2; }
   tr:nth-child(even) { background: #fafafa; }
+  .num { text-align: right; }
+  #data th { cursor: pointer; user-select: none; }
+  #data th:hover { background: #e6e6e6; }
+  #data th[data-sort="asc"]::after { content: " \25B2"; font-size: 0.7em; }
+  #data th[data-sort="desc"]::after { content: " \25BC"; font-size: 0.7em; }
+  .tools { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin: 0.5rem 0 0.75rem; }
+  #search { padding: 6px 10px; font-size: 0.95rem; width: 100%; max-width: 320px; border: 1px solid #aaa; border-radius: 4px; }
+  #count { color: #555; font-size: 0.9rem; }
 </style>
 </head>
 <body>
@@ -21,570 +33,71 @@
   <div class="meta">
     Generated 2026-10-25<br>
     Keywords: Westside Spirits, Benz Distributing<br>
-    Window: 2026-09-27 to today &middot; 557 matching row(s)<br>
-    Newest date in state data: 2026-09-30 &middot;
-    1,814,856 rows scanned &middot;
-    21,309 total keyword matches this year
+    Window: 2026-10-04 to today &middot; 0 matching row(s)<br>
+    Newest date in state data: 2026-09-30 &middot; 1,814,856 rows scanned &middot; 21,309 total keyword matches this year
   </div>
-  <table><thead><tr><th>Date</th><th>Store Name</th><th>City</th><th>Vendor Name</th><th>Item</th><th>Bottles Sold</th><th>Sale ($)</th></tr></thead><tbody>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>CASAMIGOS REPOSADO</td><td>6</td><td>256.44</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>E &amp; J GALLO WINERY</td><td>DON FULANO ANEJO</td><td>2</td><td>135</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>E &amp; J GALLO WINERY</td><td>DON FULANO REPOSADO</td><td>1</td><td>52.5</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>DON JULIO ANEJO</td><td>6</td><td>323.94</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>DON JULIO BLANCO</td><td>12</td><td>557.88</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>DON JULIO REPOSADO</td><td>6</td><td>301.44</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>LUXCO INC</td><td>EL MAYOR BLANCO</td><td>12</td><td>288</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BROWN FORMAN CORP.</td><td>HERRADURA ULTRA ANEJO</td><td>6</td><td>297</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>LUNAZUL BLANCO</td><td>24</td><td>504</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>WILLIAM GRANT &amp; SONS INC</td><td>MILAGRO REPOSADO</td><td>6</td><td>135</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>WILLIAM GRANT &amp; SONS INC</td><td>MILAGRO SILVER</td><td>18</td><td>405</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>WILLIAM GRANT &amp; SONS INC</td><td>MILAGRO SILVER</td><td>18</td><td>405</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BACARDI USA INC</td><td>PATRON ANEJO</td><td>2</td><td>90</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BACARDI USA INC</td><td>PATRON SILVER</td><td>24</td><td>899.76</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>MAST-JAGERMEISTER US, INC</td><td>TEREMANA BLANCO TEQUILA</td><td>6</td><td>143.22</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>MAST-JAGERMEISTER US, INC</td><td>TEREMANA REPOSADO TEQUILA</td><td>6</td><td>156.6</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SOVEREIGN BRANDS, LLC</td><td>BUMBU RUM</td><td>3</td><td>78.75</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>MYERS&#x27;S ORIGINAL DARK RUM</td><td>4</td><td>79.92</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>LUXCO INC</td><td>ARROW BLACKBERRY BRANDY</td><td>12</td><td>121.56</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>CHRISTIAN BROS BRANDY ROUND</td><td>12</td><td>135</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>LUXCO INC</td><td>PARAMOUNT APRICOT BRANDY</td><td>12</td><td>121.56</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>LUXCO INC</td><td>PARAMOUNT BLACKBERRY BRANDY</td><td>12</td><td>121.56</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>USDP / UNITED STATES DISTILLED PRODUCTS CO</td><td>PHILLIPS BLACKBERRY BRANDY</td><td>12</td><td>99</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>DEKUYPER BLUE CURACAO</td><td>12</td><td>94.56</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>DEKUYPER CREME DE BANANA</td><td>12</td><td>94.56</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>LUXCO INC</td><td>PARAMOUNT CREME DE CACAO WHITE</td><td>12</td><td>94.56</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>CEDAR RIDGE VINEYARDS LL</td><td>CLEARHEART GIN</td><td>66</td><td>1217.7</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>TOPPLING GOLIATH INC.</td><td>CM SOSUS GIN</td><td>3</td><td>78.75</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>LUXCO INC</td><td>PARAMOUNT GIN</td><td>12</td><td>81</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>MCCORMICK DISTILLING CO.</td><td>360 DOUBLE CHOCOLATE VODKA DSS</td><td>36</td><td>458.64</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>MCCORMICK DISTILLING CO.</td><td>360 GEORGIA PEACH VODKA DSS</td><td>12</td><td>152.88</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>TOPPLING GOLIATH INC.</td><td>CM DRAGON FANDANGO VODKA  BERRY</td><td>2</td><td>22.02</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>DEEP EDDY LEMON</td><td>12</td><td>171</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>DEEP EDDY SWEET TEA</td><td>3</td><td>42.75</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>E &amp; J GALLO WINERY</td><td>NEW AMSTERDAM PINEAPPLE</td><td>4</td><td>48</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>SMIRNOFF RASPBERRY</td><td>12</td><td>166.56</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>SMIRNOFF VANILLA</td><td>24</td><td>333.12</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>CHATHAM IMPORTS INC</td><td>SOOH CROP MEYER LEMON VODKA</td><td>3</td><td>49.32</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PARK STREET IMPORTS</td><td>THE ORIGINAL PICKLE SHOT DILL PICKLE VODKA</td><td>12</td><td>150.12</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>USDP / UNITED STATES DISTILLED PRODUCTS CO</td><td>UV CAKE</td><td>12</td><td>88.92</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>WESTERN SON BLUEBERRY VODKA</td><td>36</td><td>486</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>DEKUYPER LUSCIOUS PEACHTREE</td><td>12</td><td>141.72</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>DEKUYPER SOUR APPLE PUCKER</td><td>12</td><td>141.72</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>DEKUYPER WATERMELON PUCKER</td><td>12</td><td>141.72</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>MCCORMICK DISTILLING CO.</td><td>360 VODKA</td><td>24</td><td>305.76</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>BARTON VODKA</td><td>300</td><td>1791</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>BARTON VODKA</td><td>12</td><td>117</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>BARTON VODKA</td><td>12</td><td>117</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BLUE OX SPIRITS, INC.</td><td>BLUE OX VODKA</td><td>6</td><td>71.4</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BLUE OX SPIRITS, INC.</td><td>BLUE OX VODKA</td><td>36</td><td>262.44</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>MR BOSTON VODKA</td><td>12</td><td>63</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>E &amp; J GALLO WINERY</td><td>NEW AMSTERDAM 80PRF</td><td>12</td><td>153</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>SMIRNOFF 100PRF</td><td>3</td><td>44.97</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>SMIRNOFF 80PRF</td><td>6</td><td>132.78</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>FIFTH GENERATION DISTILLED SPIRITS, INC.</td><td>TITOS HANDMADE VODKA</td><td>120</td><td>2371.2</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>FIFTH GENERATION DISTILLED SPIRITS, INC.</td><td>TITOS HANDMADE VODKA</td><td>18</td><td>513</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>LAIRD &amp; COMPANY</td><td>FIVE STAR</td><td>24</td><td>174.96</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>MARUSSIA BEVERAGES USA, INC / NICHE IMPORT</td><td>HATOZAKI SMALL BATCH JAPANESE WHISKY</td><td>3</td><td>155.85</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>CONSTELLATION BRANDS INC</td><td>HIGH WEST CAMPFIRE</td><td>3</td><td>135</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>SKREWBALL PEANUT BUTTER WHISKEY</td><td>12</td><td>269.88</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>SUNNY BROOK BLEND WHISKEY</td><td>5</td><td>37.5</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>WESTERN SPIRITS BEVERAGE</td><td>CALUMET FARM 10YR BOURBON</td><td>6</td><td>357.3</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>BLACK VELVET</td><td>12</td><td>126</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>CANADIAN CLUB WHISKY</td><td>24</td><td>349.68</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>CROWN ROYAL</td><td>120</td><td>3148.8</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>CROWN ROYAL BLACKBERRY</td><td>12</td><td>314.88</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>CROWN ROYAL REGAL APPLE</td><td>24</td><td>737.76</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>CROWN ROYAL REGAL APPLE</td><td>6</td><td>305.94</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>CHARLES JACQUIN ET CIE</td><td>BARTENDERS HOT SEX</td><td>6</td><td>83.82</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>KAHLUA COFFEE</td><td>12</td><td>314.88</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>USDP / UNITED STATES DISTILLED PRODUCTS CO</td><td>KAMORA COFFEE LIQUEUR</td><td>12</td><td>192.12</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>USDP / UNITED STATES DISTILLED PRODUCTS CO</td><td>KAMORA COFFEE LIQUEUR</td><td>12</td><td>192.12</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>MR. BLACK COLD BREW COFFEE LIQUEUR</td><td>6</td><td>157.44</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>E &amp; J GALLO WINERY</td><td>RUMCHATA</td><td>12</td><td>252</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>RYANS CREAM LIQUEUR</td><td>12</td><td>130.2</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>E &amp; J GALLO WINERY</td><td>TIPPY COW CHOCOLATE</td><td>6</td><td>90</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>MALIBU COCONUT</td><td>24</td><td>413.76</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>MOET HENNESSY USA</td><td>HENNESSY VS</td><td>12</td><td>359.88</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>MOET HENNESSY USA</td><td>HENNESSY VS UPGRADE</td><td>6</td><td>404.94</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SHAW-ROSS INTERNATIONAL</td><td>SOOH CAPEL PISCO RESERVADO</td><td>3</td><td>44.28</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BEST CASE WINES LLC</td><td>SOOH MILLET ARMAGNAC VS</td><td>12</td><td>360</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BACARDI USA INC</td><td>BENEDICTINE LIQUEUR DOM</td><td>3</td><td>87.75</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>CARAVELLA LIMONCELLO</td><td>6</td><td>105.78</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>REMY COINTREAU USA INC</td><td>COINTREAU LIQUEUR</td><td>12</td><td>413.64</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DISARONNO INTERNATIONAL</td><td>DISARONNO AMARETTO</td><td>12</td><td>297</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PARK STREET IMPORTS</td><td>GIFFARD CREME DE MURE</td><td>3</td><td>76.47</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>MAST-JAGERMEISTER US, INC</td><td>JAGERMEISTER LIQUEUR</td><td>12</td><td>313.56</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>THE ZAMORA AMERICAS, INC.</td><td>LICOR 43</td><td>12</td><td>269.88</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>LUXCO INC</td><td>JUAREZ GOLD DSS</td><td>12</td><td>91.68</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>MONTEZUMA BLUE</td><td>24</td><td>172.8</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>HOTALING &amp; CO</td><td>NIKKA JAPANESE GIN</td><td>2</td><td>49.5</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>E &amp; J GALLO WINERY</td><td>SOONHARI LYCHEE SOJU</td><td>40</td><td>180</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>E &amp; J GALLO WINERY</td><td>SOONHARI PLUM SOJU</td><td>40</td><td>180</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>BEEFEATER GIN</td><td>12</td><td>269.88</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>MCCORMICK DISTILLING CO.</td><td>BROKERS GIN</td><td>12</td><td>207</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>WILLIAM GRANT &amp; SONS INC</td><td>HENDRICKS GIN</td><td>30</td><td>900</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>TANQUERAY GIN</td><td>12</td><td>287.88</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>ABSOLUT PEARS</td><td>12</td><td>161.88</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>EFFEN BLACK CHERRY</td><td>6</td><td>112.5</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>EFFEN BLOOD ORANGE</td><td>6</td><td>112.5</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>PINNACLE WHIPPED</td><td>6</td><td>90</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>DR MCGILLICUDDYS CHERRY</td><td>24</td><td>405.12</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>DR MCGILLICUDDYS MENTHOLMINT</td><td>24</td><td>405.12</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>DR MCGILLICUDDYS MENTHOLMINT</td><td>6</td><td>135</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>DR MCGILLICUDDYS VANILLA</td><td>12</td><td>202.56</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>DR MCGILLICUDDYS WILD GRAPE</td><td>24</td><td>320.16</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>RUMPLE MINZE PEPPERMINT SCHNAPPS LIQUEUR</td><td>24</td><td>611.76</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>MOET HENNESSY USA</td><td>BELVEDERE ORGANIC</td><td>6</td><td>202.44</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BACARDI USA INC</td><td>GREY GOOSE</td><td>18</td><td>513</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>HAKU VODKA</td><td>2</td><td>46.5</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>KETEL ONE</td><td>12</td><td>272.88</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PROXIMO</td><td>BUSHMILLS BLACK BUSH IRISH WHISKEY</td><td>2</td><td>69</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PROXIMO</td><td>BUSHMILLS IRISH WHISKEY</td><td>3</td><td>83.25</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>JAMESON</td><td>12</td><td>638.64</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>JAMESON</td><td>48</td><td>1510.56</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>LUXCO INC</td><td>THE QUIET MAN</td><td>2</td><td>49.5</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>LUXCO INC</td><td>THE QUIET MAN 8YR</td><td>2</td><td>64.5</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>WILLIAM GRANT &amp; SONS INC</td><td>TULLAMORE DEW</td><td>3</td><td>67.5</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>WILLIAM GRANT &amp; SONS INC</td><td>TULLAMORE DEW 14YR</td><td>6</td><td>427.5</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BACARDI USA INC</td><td>ILEGAL MEZCAL JOVEN</td><td>2</td><td>60</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BACARDI USA INC</td><td>ILEGAL MEZCAL REPOSADO</td><td>2</td><td>76.5</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>CAMPARI AMERICA</td><td>MONTELOBOS ESPADIN MEZCAL</td><td>6</td><td>180</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>21SEEDS CUCUMBER JALAPENO TEQUILA</td><td>18</td><td>472.5</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PROXIMO</td><td>JOSE CUERVO ESPECIAL REPOSADO</td><td>12</td><td>270</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>LUXCO INC</td><td>JUAREZ SILVER</td><td>24</td><td>324</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>WILLIAM GRANT &amp; SONS INC</td><td>FAMOUS GROUSE SCOTCH</td><td>12</td><td>225</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>EDRINGTON GROUP USA LLC</td><td>MACALLAN 12YR</td><td>3</td><td>213.9</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>ADMIRAL NELSON SPICED</td><td>6</td><td>112.5</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>ADMIRAL NELSON SPICED</td><td>4</td><td>48</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>CAPTAIN MORGAN ORIGINAL SPICED</td><td>108</td><td>2104.92</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>BASIL HAYDEN 10YR</td><td>2</td><td>127.5</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>BASIL HAYDEN 8YR</td><td>12</td><td>387</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>BASIL HAYDEN TOAST</td><td>2</td><td>75</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>BENCHMARK OLD NO 8</td><td>12</td><td>126</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>BULLEIT BOURBON</td><td>12</td><td>323.88</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PROXIMO</td><td>BUSHMILLS 12YR SINGLE MALT IRISH WHISKEY</td><td>2</td><td>91.5</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>EVAN WILLIAMS  BLACK</td><td>12</td><td>180</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>E &amp; J GALLO WINERY</td><td>FOUR ROSES SMALL BATCH</td><td>3</td><td>83.25</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>HENRY MCKENNA BOURBON</td><td>24</td><td>270</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>JEFFERSONS BOURBON</td><td>2</td><td>67.18</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>JIM BEAM</td><td>12</td><td>243</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>MAKERS MARK</td><td>12</td><td>405</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BROWN FORMAN CORP.</td><td>OLD FORESTER BOURBON 86PRF</td><td>12</td><td>224.64</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>LUXCO INC</td><td>PENELOPE BOURBON TOASTED BARREL FINISH</td><td>2</td><td>90</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BROWN FORMAN CORP.</td><td>WOODFORD RESERVE</td><td>12</td><td>439.8</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>RITTENHOUSE RYE WHISKEY</td><td>12</td><td>252</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>CROWN ROYAL CHOCOLATE</td><td>12</td><td>314.88</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BROWN FORMAN CORP.</td><td>GLENDRONACH 12YR ORIGINAL</td><td>2</td><td>102</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BROWN FORMAN CORP.</td><td>GLENDRONACH 15 YEAR</td><td>2</td><td>179.26</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>LUXCO INC</td><td>PENELOPE F CANCER 5TH EDITION</td><td>1</td><td>60</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BROWN FORMAN CORP.</td><td>JACK DANIELS OLD #7 BLACK LABEL</td><td>24</td><td>729.84</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>DEKUYPER TRIPLE SEC</td><td>12</td><td>49.56</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>LUXCO INC</td><td>PARAMOUNT TRIPLE SEC</td><td>48</td><td>294.72</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>FIREBALL CINNAMON WHISKEY</td><td>12</td><td>216</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BACARDI USA INC</td><td>BACARDI SUPERIOR</td><td>12</td><td>171</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>BARTON LIGHT RUM</td><td>24</td><td>162</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BLUE OX SPIRITS, INC.</td><td>BLUE OX SILVER RUM</td><td>12</td><td>98.64</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BACARDI USA INC</td><td>CASTILLO SILVER RUM</td><td>12</td><td>94.56</td></tr>
-<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SERRALLES USA</td><td>DON Q CRISTAL</td><td>12</td><td>157.68</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PROXIMO</td><td>1800 ANEJO</td><td>3</td><td>103.5</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PROXIMO</td><td>1800 CRISTALINO</td><td>3</td><td>133.92</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>PROXIMO</td><td>1800 SILVER</td><td>1</td><td>24.75</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>STOLLER IMPORTS INC / MARSALLE COMPANY</td><td>ADICTIVO REPOSADO</td><td>2</td><td>90</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>CAMPARI AMERICA</td><td>CABO WABO REPOSADO</td><td>6</td><td>171</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>CASAMIGOS BLANCO</td><td>18</td><td>742.32</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>CASAMIGOS BLANCO</td><td>30</td><td>1237.2</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>CASAMIGOS REPOSADO</td><td>1</td><td>42.74</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>CASAMIGOS REPOSADO</td><td>24</td><td>1025.76</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>CASAMIGOS REPOSADO</td><td>18</td><td>769.32</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>BACARDI USA INC</td><td>CAZADORES BLANCO</td><td>1</td><td>17.24</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BACARDI USA INC</td><td>CAZADORES REPOSADO</td><td>12</td><td>224.64</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>PARK STREET IMPORTS</td><td>CINCORO REPOSADO TEQUILA</td><td>1</td><td>75</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>TEQUILAS PREMIUM, INC</td><td>CLASE AZUL REPOSADO</td><td>2</td><td>290.02</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>DON JULIO 70TH ANNIVERSARY</td><td>6</td><td>328.44</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>DON JULIO ANEJO</td><td>6</td><td>323.94</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>DON JULIO BLANCO</td><td>1</td><td>46.49</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>DON JULIO BLANCO</td><td>12</td><td>557.88</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>DON JULIO BLANCO</td><td>2</td><td>44.98</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>DON JULIO REPOSADO</td><td>12</td><td>602.88</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>DON JULIO REPOSADO MINI</td><td>1</td><td>45</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>LUXCO INC</td><td>EL MAYOR ANEJO</td><td>1</td><td>27.75</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>MS WALKER INC</td><td>GHOST TEQUILA BLANCO</td><td>2</td><td>60</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>STOLLER IMPORTS INC / MARSALLE COMPANY</td><td>GRAN CAVA DE ORO  ANEJO</td><td>6</td><td>315</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PROXIMO</td><td>GRAN CENTENARIO ANEJO</td><td>2</td><td>96</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>PARK STREET IMPORTS</td><td>HA FORTALEZA TEQUILA BLANCO</td><td>3</td><td>117.78</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PARK STREET IMPORTS</td><td>HA FORTALEZA TEQUILA BLANCO</td><td>3</td><td>117.78</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>PARK STREET IMPORTS</td><td>HA FORTALEZA TEQUILA REPOSADO</td><td>2</td><td>94.02</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PARK STREET IMPORTS</td><td>HA FORTALEZA TEQUILA REPOSADO</td><td>2</td><td>94.02</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BROWN FORMAN CORP.</td><td>HERRADURA REPOSADO</td><td>6</td><td>261.9</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>PROXIMO</td><td>JOSE CUERVO ESPECIAL SILVER MINI</td><td>1</td><td>18.5</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>PARK STREET IMPORTS</td><td>LA GRITONA REPOSADO TEQUILA</td><td>4</td><td>188.52</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>LUNAZUL BLANCO</td><td>1</td><td>21</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>LUNAZUL BLANCO</td><td>12</td><td>252</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>WILLIAM GRANT &amp; SONS INC</td><td>MILAGRO SILVER</td><td>18</td><td>405</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>OLMECA ALTOS PLATA</td><td>6</td><td>134.94</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>OLMECA ALTOS PLATA</td><td>6</td><td>134.94</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>PARK STREET IMPORTS</td><td>PANTALONES TEQUILA REPOSADO</td><td>1</td><td>37.5</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>BACARDI USA INC</td><td>PATRON REPOSADO</td><td>1</td><td>41.25</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BACARDI USA INC</td><td>PATRON SILVER</td><td>24</td><td>899.76</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>SIETE LEGUAS BLANCO TEQUILA</td><td>2</td><td>81</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>SIETE LEGUAS REPOSADO TEQUILA</td><td>2</td><td>88.5</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>TEQUILA OCHO PLATA</td><td>2</td><td>75</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>MHW LTD</td><td>BARBANCOURT 5* RHUM 8YR</td><td>24</td><td>551.52</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>SOVEREIGN BRANDS, LLC</td><td>BUMBU RUM</td><td>6</td><td>157.5</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>LUXURY SPIRITS INTERNATIONAL LLC</td><td>FLOR DE CANA 7YR GRAN RESERVA</td><td>1</td><td>20.39</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>MYERS&#x27;S ORIGINAL DARK RUM</td><td>12</td><td>239.76</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>PALM BAY INTERNATIONAL</td><td>SOOH DOS MADERAS PX 5+5</td><td>1</td><td>32.51</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>LUXCO INC</td><td>PARAMOUNT CHERRY BRANDY</td><td>12</td><td>121.56</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>PAUL MASSON APPLE GRANDE AMBER BRANDY</td><td>1</td><td>7.5</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>PAUL MASSON GRANDE AMBER BRANDY VS</td><td>2</td><td>15</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>PAUL MASSON GRANDE AMBER BRANDY VS</td><td>1</td><td>15</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>PAUL MASSON GRANDE AMBER BRANDY VSOP</td><td>2</td><td>15</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>IA-NATIVE SPIRITS</td><td>CM LEMONCELLO 50010</td><td>3</td><td>65.22</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>DEKUYPER BLUE CURACAO</td><td>12</td><td>94.56</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>DEKUYPER CREME DE BANANA</td><td>1</td><td>7.88</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>DEKUYPER MELON LIQUEUR</td><td>12</td><td>121.56</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>INTERCONTINENTAL PACKAGING COMPANY/PRESTIGE BEVERAGE GROUP</td><td>KINKY PINK MINI</td><td>1</td><td>7.26</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>LUXCO INC</td><td>PARAMOUNT AMARETTO</td><td>12</td><td>77.4</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>LUXCO INC</td><td>PARAMOUNT CREME DE CACAO WHITE</td><td>1</td><td>7.88</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BACARDI USA INC</td><td>PATRON CITRONGE</td><td>3</td><td>56.25</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>PHANTOM V DISTILLING CO</td><td>PHANTOM V DISTILLING OLD FASHION OATMEAL COOKIE</td><td>1</td><td>24.72</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>DUNKEL CORPORATION / IOWA DISTILLING</td><td>SAINTS N SINNERS APPLE PIE</td><td>4</td><td>54</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>AVIATION AMERICAN GIN</td><td>6</td><td>150.06</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>LAIRD &amp; COMPANY</td><td>FIVE O&#x27;CLOCK GIN</td><td>3</td><td>20.97</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>LUXCO INC</td><td>PARAMOUNT GIN</td><td>12</td><td>81</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>LUXCO INC</td><td>PARAMOUNT GIN</td><td>12</td><td>81</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>SEAGRAMS EXTRA DRY GIN</td><td>2</td><td>23.98</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>SEAGRAMS EXTRA DRY GIN MINI</td><td>2</td><td>9.9</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>SEAGRAMS EXTRA DRY GIN PET</td><td>1</td><td>6.33</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>ST GEORGE SPIRITS INC</td><td>SOOH ST GEORGE TERROIR GIN</td><td>1</td><td>26.25</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>MCCORMICK DISTILLING CO.</td><td>360 DOUBLE CHOCOLATE VODKA DSS</td><td>12</td><td>152.88</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>MCCORMICK DISTILLING CO.</td><td>360 DOUBLE CHOCOLATE VODKA DSS</td><td>12</td><td>152.88</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BLUE OX SPIRITS, INC.</td><td>BLUE OX DILLD UP</td><td>12</td><td>150.12</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>DEEP EDDY LEMON</td><td>12</td><td>171</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>DEEP EDDY PEACH</td><td>3</td><td>42.75</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>DEEP EDDY PINEAPPLE</td><td>1</td><td>14.25</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>DEEP EDDY SWEET TEA</td><td>1</td><td>14.25</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>DIRTY DILL</td><td>DIRTY DILL SPICY PICKLE</td><td>1</td><td>12.51</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>E &amp; J GALLO WINERY</td><td>NEW AMSTERDAM LEMON</td><td>12</td><td>144</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>LUXCO INC</td><td>PEARL BLUEBERRY</td><td>12</td><td>130.56</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>LUXCO INC</td><td>PEARL CUCUMBER</td><td>12</td><td>130.56</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>SMIRNOFF BLUE RASPBERRY LEMONADE</td><td>2</td><td>24.76</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>SMIRNOFF ORANGE</td><td>1</td><td>12.38</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>SMIRNOFF RASPBERRY</td><td>12</td><td>166.56</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>SMIRNOFF RASPBERRY</td><td>3</td><td>41.64</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>SMIRNOFF STRAWBERRY</td><td>12</td><td>166.56</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>SMIRNOFF VANILLA</td><td>36</td><td>499.68</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>SMIRNOFF ZERO SUGAR INFUSION STRAWBERRY &amp; ROSE</td><td>2</td><td>24.76</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>ST GEORGE SPIRITS INC</td><td>SOOH ST GEORGE GREEN CHILE VODKA</td><td>6</td><td>126</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PARK STREET IMPORTS</td><td>THE ORIGINAL PICKLE SHOT DILL PICKLE VODKA</td><td>12</td><td>150.12</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>PARK STREET IMPORTS</td><td>THE ORIGINAL PICKLE SHOT DILL PICKLE VODKA BOX MINI</td><td>2</td><td>16</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>WESTERN SON BLUEBERRY VODKA</td><td>6</td><td>81</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>WESTERN SON PRICKLY PEAR</td><td>3</td><td>40.5</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>WESTERN SON WATERMELON</td><td>6</td><td>81</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>99 BANANAS</td><td>1</td><td>11.25</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>DEKUYPER CHERRY PUCKER</td><td>2</td><td>23.62</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>DEKUYPER GRAPE PUCKER</td><td>12</td><td>141.72</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>DEKUYPER GRAPE PUCKER</td><td>12</td><td>141.72</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>DEKUYPER HOT DAMN!</td><td>1</td><td>10.13</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>DEKUYPER LUSCIOUS PEACHTREE</td><td>24</td><td>283.44</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>DEKUYPER LUSCIOUS PEACHTREE</td><td>36</td><td>425.16</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>DEKUYPER SOUR APPLE PUCKER</td><td>12</td><td>141.72</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>DEKUYPER WATERMELON PUCKER</td><td>12</td><td>141.72</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>DR MCGILLICUDDYS SOUR GREEN APPLE MINI</td><td>1</td><td>7.5</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>MR BOSTON BLUE CURACAO</td><td>12</td><td>81</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>MR BOSTON PEACH</td><td>12</td><td>90</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>MR BOSTON SOUR APPLE SCHNAPPS</td><td>12</td><td>90</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>MR BOSTON WATERMELON SCHNAPPS</td><td>12</td><td>90</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>LUXCO INC</td><td>PARAMOUNT STRAWBERRY SCHNAPPS</td><td>1</td><td>7.88</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>USDP / UNITED STATES DISTILLED PRODUCTS CO</td><td>PHILLIPS ROOT BEER SCHNAPPS</td><td>12</td><td>108</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>MCCORMICK DISTILLING CO.</td><td>360 VODKA</td><td>12</td><td>152.88</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>CEDAR RIDGE VINEYARDS LL</td><td>BAGGER VODKA</td><td>60</td><td>750.6</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>BARTON VODKA</td><td>96</td><td>573.12</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>BLUE OX SPIRITS, INC.</td><td>BLUE OX VODKA</td><td>6</td><td>71.4</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BLUE OX SPIRITS, INC.</td><td>BLUE OX VODKA</td><td>60</td><td>437.4</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>MCCORMICK DISTILLING CO.</td><td>MCCORMICK 80PRF VODKA</td><td>24</td><td>158.16</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>MR BOSTON VODKA</td><td>12</td><td>63</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>USDP / UNITED STATES DISTILLED PRODUCTS CO</td><td>PHILLIPS VODKA</td><td>12</td><td>81</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>USDP / UNITED STATES DISTILLED PRODUCTS CO</td><td>PRAIRIE ORGANIC VODKA</td><td>1</td><td>15</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>SMIRNOFF 80PRF</td><td>4</td><td>29.96</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>SMIRNOFF PEACH LEMONADE</td><td>4</td><td>49.52</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>FIFTH GENERATION DISTILLED SPIRITS, INC.</td><td>TITOS HANDMADE VODKA</td><td>96</td><td>1896.96</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>FIFTH GENERATION DISTILLED SPIRITS, INC.</td><td>TITOS HANDMADE VODKA</td><td>12</td><td>342</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>FIFTH GENERATION DISTILLED SPIRITS, INC.</td><td>TITOS HANDMADE VODKA</td><td>12</td><td>97.56</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>MHW LTD</td><td>BARRELL BOURBON CIGAR BLEND</td><td>6</td><td>369</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>BULLEIT 87</td><td>1</td><td>26.99</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>LAIRD &amp; COMPANY</td><td>FIVE STAR</td><td>12</td><td>87.48</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>SEAGRAMS 7 CROWN</td><td>12</td><td>134.88</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>SHEEP DOG PEANUT BUTTER MINI</td><td>1</td><td>7.5</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>SKREWBALL PEANUT BUTTER WHISKEY</td><td>3</td><td>67.47</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>SKREWBALL PEANUT BUTTER WHISKEY</td><td>12</td><td>269.88</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>SUNNY BROOK BLEND WHISKEY</td><td>12</td><td>90</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>EVAN WILLIAMS WHITE</td><td>1</td><td>28.5</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>HENRY MCKENNA SINGLE BARREL 10YR</td><td>1</td><td>48.75</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>HENRY MCKENNA SINGLE BARREL 10YR</td><td>1</td><td>48.75</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>JTS BROWN BONDED BOURBON</td><td>4</td><td>54</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>OLD GRAND-DAD 100PRF BOND BOURBON 4YR</td><td>1</td><td>20.25</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>BLACK VELVET</td><td>12</td><td>126</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>BLACK VELVET RESERVE</td><td>1</td><td>22.5</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>BLACK VELVET TOASTED CARAMEL</td><td>12</td><td>108</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>CANADIAN CLUB WHISKY</td><td>12</td><td>174.84</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>CARIBOU CROSSING</td><td>1</td><td>41.25</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>CARIBOU CROSSING</td><td>1</td><td>41.25</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>CROWN ROYAL</td><td>120</td><td>3148.8</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>CROWN ROYAL</td><td>2</td><td>52.48</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>CROWN ROYAL BLACK</td><td>3</td><td>85.47</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>CROWN ROYAL BLACKBERRY</td><td>12</td><td>314.88</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>CROWN ROYAL PEACH</td><td>6</td><td>76.44</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>CROWN ROYAL PEACH</td><td>36</td><td>1106.64</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>CROWN ROYAL REGAL APPLE</td><td>48</td><td>1475.52</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>CROWN ROYAL REGAL APPLE</td><td>2</td><td>25.48</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>SEAGRAMS VO CANADIAN WHISKEY</td><td>12</td><td>119.4</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>PROXIMO</td><td>1800 ULTIMATE MARGARITA</td><td>3</td><td>45.18</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>CAPTAIN MORGAN LONG ISLAND ICED TEA</td><td>1</td><td>16.5</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>MISSISSIPPI RIVER DISTILLING COMPANY LLC</td><td>CODY ROAD BARREL OLD FASHIONED</td><td>1</td><td>25.5</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>PROXIMO</td><td>JOSE CUERVO AUTHENTIC LIME MARGARITA</td><td>3</td><td>39.33</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>ON THE ROCKS BLUE HAWAIIAN</td><td>1</td><td>9.75</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>ON THE ROCKS COCKTAILS HORNITOS MARGARITA</td><td>2</td><td>19.5</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>LUXCO INC</td><td>PENELOPE RTP BLACK WALNUT OLD FASHIONED</td><td>2</td><td>45</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>KAHLUA COFFEE</td><td>12</td><td>314.88</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>USDP / UNITED STATES DISTILLED PRODUCTS CO</td><td>KAMORA COFFEE LIQUEUR</td><td>12</td><td>192.12</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>MR. BLACK COLD BREW COFFEE LIQUEUR</td><td>6</td><td>157.44</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>BAILEYS ORIGINAL IRISH CREAM</td><td>24</td><td>755.76</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>MARUSSIA BEVERAGES USA, INC / NICHE IMPORT</td><td>MOZART CHOCOLATE CREAM LIQUEUR</td><td>6</td><td>143.82</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>MARUSSIA BEVERAGES USA, INC / NICHE IMPORT</td><td>MOZART CHOCOLATE CREAM LIQUEUR</td><td>1</td><td>23.97</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>MARUSSIA BEVERAGES USA, INC / NICHE IMPORT</td><td>MOZART WHITE CHOCOLATE CREAM LIQUEUR</td><td>6</td><td>143.82</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>REVELTON DISTILLING COMPANY</td><td>REVELTON WHISKEY AND CREAM LIQUEUR</td><td>6</td><td>135</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>E &amp; J GALLO WINERY</td><td>RUMCHATA</td><td>12</td><td>252</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>MCCORMICK DISTILLING CO.</td><td>TEQUILA ROSE LIQUEUR</td><td>4</td><td>81</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>E &amp; J GALLO WINERY</td><td>TIPPY COW ORANGE CREAM</td><td>6</td><td>90</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>173 CRAFT DISTILLERY</td><td>173 CRAFT DISTILLERY HONEY LEMON FLAVORED GIN</td><td>3</td><td>81</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DISARONNO INTERNATIONAL</td><td>ENGINE ORGANIC GIN</td><td>2</td><td>45</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>REVELTON DISTILLING COMPANY</td><td>REVELTON MULBERRY GIN</td><td>6</td><td>157.5</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>BACARDI USA INC</td><td>BACARDI LIME</td><td>1</td><td>13.49</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BACARDI USA INC</td><td>BACARDI RASPBERRY</td><td>3</td><td>40.47</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>CAPTAIN MORGAN PINEAPPLE</td><td>3</td><td>37.17</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>CRUZAN BLACK CHERRY</td><td>3</td><td>33.75</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>CRUZAN RASPBERRY</td><td>3</td><td>33.75</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>CRUZAN VANILLA</td><td>1</td><td>11.25</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>MALIBU COCONUT</td><td>36</td><td>620.64</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>EDRINGTON GROUP USA LLC</td><td>BRUGAL ANEJO SUPERIOR RUM</td><td>1</td><td>18.66</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>CAMPARI AMERICA</td><td>COURVOISIER VS COGNAC</td><td>1</td><td>24.75</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>BACARDI USA INC</td><td>D&#x27;USSE VSOP</td><td>1</td><td>37.5</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>MOET HENNESSY USA</td><td>HENNESSY VS</td><td>12</td><td>359.88</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>MOET HENNESSY USA</td><td>HENNESSY XO GB UPGRADE</td><td>1</td><td>149.99</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>REMY COINTREAU USA INC</td><td>REMY MARTIN VSOP</td><td>2</td><td>72</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BACARDI USA INC</td><td>B&amp;B DOM</td><td>12</td><td>360</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>MARUSSIA BEVERAGES USA, INC / NICHE IMPORT</td><td>BARENJAGER HONEY LIQUEUR</td><td>6</td><td>163.08</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>CARAVELLA LIMONCELLO</td><td>6</td><td>105.78</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BROWN FORMAN CORP.</td><td>CHAMBORD LIQUEUR ROYALE DE FRANCE</td><td>12</td><td>360</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>REMY COINTREAU USA INC</td><td>COINTREAU LIQUEUR</td><td>12</td><td>413.64</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>WILLIAM GRANT &amp; SONS INC</td><td>DRAMBUIE LIQUEUR</td><td>3</td><td>108</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PARK STREET IMPORTS</td><td>FERNET BRANCA</td><td>6</td><td>197.94</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>PARK STREET IMPORTS</td><td>FERNET BRANCA</td><td>1</td><td>32.99</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>CAMPARI AMERICA</td><td>FRANGELICO LIQUEUR</td><td>12</td><td>297</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PARK STREET IMPORTS</td><td>GIFFARD BANANE DU BRESIL</td><td>6</td><td>184.5</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PARK STREET IMPORTS</td><td>GIFFARD CREME DE MURE</td><td>6</td><td>152.94</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PARK STREET IMPORTS</td><td>GIFFARD CREME DE PECHE DE VIGNE</td><td>6</td><td>152.94</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>HPNOTIQ</td><td>1</td><td>18.75</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>MAST-JAGERMEISTER US, INC</td><td>JAGERMEISTER LIQUEUR</td><td>24</td><td>627.12</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>THE ZAMORA AMERICAS, INC.</td><td>LICOR 43</td><td>24</td><td>539.76</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>THE ZAMORA AMERICAS, INC.</td><td>LICOR 43 CHOCOLATE</td><td>6</td><td>134.94</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>HOTALING &amp; CO</td><td>LUXARDO MARASCHINO CHERRY</td><td>4</td><td>114</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>REMY COINTREAU USA INC</td><td>METAXA OUZO</td><td>3</td><td>47.16</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>MARUSSIA BEVERAGES USA, INC / NICHE IMPORT</td><td>MOZART DARK CHOCOLATE LIQUEUR</td><td>6</td><td>143.82</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PATERNO IMPORTS LTD / TERLATO WINES INTERNATIONAL</td><td>NONINO AMARO QUINTESSENTIA</td><td>6</td><td>292.5</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>PATERNO IMPORTS LTD / TERLATO WINES INTERNATIONAL</td><td>NONINO AMARO QUINTESSENTIA</td><td>1</td><td>48.75</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>MHW LTD</td><td>SOOH DOLIN GENEPY DES APLEZ LE CHAMOIS</td><td>1</td><td>27.89</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>MHW LTD</td><td>CHICA CHIDA PEANUT BUTTER AGAVE SPIRIT</td><td>1</td><td>22.5</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>JINRO AMERICA INC</td><td>JINRO PLUM SOJU</td><td>20</td><td>87.4</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>LUXCO INC</td><td>JUAREZ GOLD DSS</td><td>144</td><td>1100.16</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>TORTILLA GOLD DSS</td><td>72</td><td>529.2</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>BEEFEATER GIN</td><td>3</td><td>53.97</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>MCCORMICK DISTILLING CO.</td><td>BROKERS GIN</td><td>12</td><td>207</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>MHW LTD</td><td>GLENDALOUGH WILD BOTANICAL GIN</td><td>2</td><td>45</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>MHW LTD</td><td>GLENDALOUGH WILD BOTANICAL GIN</td><td>1</td><td>22.5</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>WILLIAM GRANT &amp; SONS INC</td><td>HENDRICKS GIN</td><td>6</td><td>193.5</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>WILLIAM GRANT &amp; SONS INC</td><td>HENDRICKS ORBIUM</td><td>1</td><td>30</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>MONKEY 47 GIN</td><td>3</td><td>134.91</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>NOLETS SILVER GIN</td><td>1</td><td>29.99</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>PLYMOUTH GIN</td><td>3</td><td>83.49</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>TANQUERAY RANGPUR GIN</td><td>3</td><td>65.22</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>REMY COINTREAU USA INC</td><td>THE BOTANIST ISLAY DRY GIN</td><td>6</td><td>166.32</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>REMY COINTREAU USA INC</td><td>THE BOTANIST ISLAY DRY GIN</td><td>3</td><td>83.16</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>ABSOLUT CITRON</td><td>12</td><td>269.88</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>ABSOLUT GRAPEFRUIT</td><td>1</td><td>13.49</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>ABSOLUT MANGO</td><td>3</td><td>40.47</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>ABSOLUT PEARS</td><td>12</td><td>161.88</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>ABSOLUT VANILIA</td><td>12</td><td>269.88</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>EFFEN BLACK CHERRY</td><td>6</td><td>112.5</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>EFFEN BLOOD ORANGE</td><td>6</td><td>112.5</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>EFFEN BLOOD ORANGE</td><td>6</td><td>112.5</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>CARRIAGE HOUSE IMPORTS</td><td>FIGENZA MEDITERRANEAN FIG VODKA</td><td>6</td><td>202.5</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>KETEL ONE BOTANICAL CUCUMBER &amp; MINT</td><td>3</td><td>51</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>KETEL ONE BOTANICAL PEACH &amp; ORANGE BLOSSOM</td><td>3</td><td>51</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>PINNACLE WHIPPED</td><td>12</td><td>117</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PROXIMO</td><td>THREE OLIVES LOOPY</td><td>12</td><td>179.28</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>MHW LTD</td><td>VAN GOGH ACAI-BLUEBERRY</td><td>1</td><td>21.63</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>DR MCGILLICUDDYS CHERRY</td><td>48</td><td>810.24</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>DR MCGILLICUDDYS MENTHOLMINT</td><td>24</td><td>405.12</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>DR MCGILLICUDDYS ROOT BEER</td><td>3</td><td>40.02</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>DR MCGILLICUDDYS VANILLA</td><td>12</td><td>202.56</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>DR MCGILLICUDDYS WILD GRAPE</td><td>1</td><td>13.34</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>RUMPLE MINZE PEPPERMINT SCHNAPPS LIQUEUR</td><td>36</td><td>917.64</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>MHW LTD</td><td>BELUGA GOLD LINE VODKA</td><td>2</td><td>199.98</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>MHW LTD</td><td>BELUGA NOBLE VODKA</td><td>2</td><td>63.96</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>MHW LTD</td><td>BELUGA NOBLE VODKA</td><td>6</td><td>191.88</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>CIROC SPIRITS LLC</td><td>CIROC LIMONATA</td><td>1</td><td>24.74</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BACARDI USA INC</td><td>GREY GOOSE</td><td>6</td><td>171</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>HAKU VODKA</td><td>1</td><td>23.25</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>KETEL ONE</td><td>1</td><td>32.24</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>GREEN SPOT</td><td>1</td><td>59.97</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>JAMESON</td><td>72</td><td>2265.84</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>JAMESON</td><td>2</td><td>52.48</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>JAMESON BLACK BARREL</td><td>2</td><td>23.98</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>JAMESON BLACK BARREL</td><td>3</td><td>101.16</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>JAMESON MINI</td><td>1</td><td>19.8</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>JAMESON ORANGE</td><td>30</td><td>674.7</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>JAMESON TRIPLE TRIPLE</td><td>3</td><td>78.72</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>POWERS GOLD IRISH WHISKEY</td><td>2</td><td>52.8</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>POWERS GOLD IRISH WHISKEY</td><td>1</td><td>26.4</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>REDBREAST 12YR</td><td>2</td><td>119.94</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>WILLIAM GRANT &amp; SONS INC</td><td>TULLAMORE DEW</td><td>1</td><td>22.5</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>INTERCONTINENTAL PACKAGING COMPANY/PRESTIGE BEVERAGE GROUP</td><td>WHISTLER HONEY IRISH WHISKEY</td><td>3</td><td>69.75</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>DEL MAGUEY MEZCAL VIDA</td><td>6</td><td>179.82</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>CAMPARI AMERICA</td><td>MONTELOBOS ESPADIN MEZCAL</td><td>1</td><td>30</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PROXIMO</td><td>JOSE CUERVO ESPECIAL REPOSADO</td><td>12</td><td>270</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>PROXIMO</td><td>JOSE CUERVO ESPECIAL REPOSADO</td><td>3</td><td>54</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>LUXCO INC</td><td>JUAREZ GOLD</td><td>12</td><td>162</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>LUXCO INC</td><td>JUAREZ SILVER</td><td>12</td><td>162</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>LUXCO INC</td><td>JUAREZ SILVER</td><td>12</td><td>162</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>TORTILLA WHITE</td><td>24</td><td>275.76</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>LUXURY SPIRITS INTERNATIONAL LLC</td><td>FLOR DE CANA COCO</td><td>3</td><td>35.61</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DUNKEL CORPORATION / IOWA DISTILLING</td><td>ROCKET FUEL</td><td>12</td><td>119.76</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>OLE SMOKY DISTILLERY LLC</td><td>OLE SMOKY APPLE PIE MOONSHINE 70PRF MINI</td><td>1</td><td>13.13</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>OLE SMOKY DISTILLERY LLC</td><td>OLE SMOKY BUTTER PECAN MOONSHINE MINI</td><td>1</td><td>13.13</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>OLE SMOKY DISTILLERY LLC</td><td>OLE SMOKY LEMON DROP MOONSHINE</td><td>1</td><td>17.25</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>OLE SMOKY DISTILLERY LLC</td><td>OLE SMOKY MANGO HABANERO WHISKEY</td><td>6</td><td>90</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>OLE SMOKY DISTILLERY LLC</td><td>OLE SMOKY SALTY CARAMEL WHISKEY</td><td>6</td><td>90</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>CHIVAS REGAL 12YR</td><td>1</td><td>30.72</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BACARDI USA INC</td><td>DEWARS WHITE LABEL SCOTCH</td><td>4</td><td>90</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>FOLEY FAMILY WINES, INC.</td><td>GLEN SCOTIA VICTORIANA SINGLE MALT SCOTCH WHISKY</td><td>6</td><td>451.08</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>JOHNNIE WALKER BLACK</td><td>1</td><td>32.99</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>JOHNNIE WALKER BLACK CASK</td><td>2</td><td>65.98</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>JOHNNIE WALKER BLUE</td><td>1</td><td>168.74</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>LAGAVULIN 8YR</td><td>3</td><td>168.72</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>SCORESBY RARE SCOTCH</td><td>2</td><td>33</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>173 CRAFT DISTILLERY</td><td>173 CRAFT DISTILLERY SINGLE BARREL BOURBON</td><td>2</td><td>75</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>EAGLE RARE</td><td>2</td><td>67.5</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>EAGLE RARE</td><td>2</td><td>67.5</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>MOET HENNESSY USA</td><td>ARDBEG 10YR ISLAY</td><td>3</td><td>141.72</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>MOET HENNESSY USA</td><td>ARDBEG 15YO TRUDERNISH</td><td>6</td><td>404.94</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>BOWMORE SCOTCH 12YR</td><td>3</td><td>157.5</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>MOET HENNESSY USA</td><td>GLENMORANGIE 15YO LASANTA GB</td><td>1</td><td>47.24</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>EDRINGTON GROUP USA LLC</td><td>MACALLAN 12YR</td><td>3</td><td>213.9</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>MHW LTD</td><td>SOOH BARBANCOURT 3* RHUM 4YR</td><td>12</td><td>234.6</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>ADMIRAL NELSON SPICED</td><td>1</td><td>10.5</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>CAPTAIN MORGAN 100PRF SPICED RUM</td><td>3</td><td>49.47</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>CAPTAIN MORGAN ORIGINAL SPICED</td><td>96</td><td>1871.04</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>CAPTAIN MORGAN ORIGINAL SPICED</td><td>1</td><td>19.49</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>PROXIMO</td><td>KRAKEN BLACK SPICED RUM</td><td>6</td><td>157.5</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>PROXIMO</td><td>KRAKEN BLACK SPICED RUM</td><td>1</td><td>17.25</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>1792 SMALL BATCH</td><td>1</td><td>24</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>1792 SMALL BATCH BOURBON</td><td>1</td><td>9.38</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>ANCIENT AGE BOURBON</td><td>3</td><td>27.72</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>THE BARDSTOWN BOURBON COMPANY LLC</td><td>BARDSTOWN BOURBON ORIGIN SERIES KENTUCKY STRAIGHT BOURBON WH</td><td>3</td><td>112.5</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>BASIL HAYDEN 10YR</td><td>1</td><td>63.75</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>BENCHMARK OLD NO 8</td><td>12</td><td>126</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BROWN FORMAN CORP.</td><td>BP WOODFORD RESERVE DOUBLE OAKED BARREL PROOF PERSONAL SELEC</td><td>1</td><td>77.93</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>BROWN FORMAN CORP.</td><td>BP WOODFORD RESERVE DOUBLE OAKED BARREL PROOF PERSONAL SELEC</td><td>1</td><td>77.93</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>BUFFALO TRACE BOURBON</td><td>12</td><td>234</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>BUFFALO TRACE BOURBON</td><td>12</td><td>234</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>BULLEIT BOURBON</td><td>12</td><td>323.88</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>BULLEIT BOURBON</td><td>1</td><td>13.11</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>CABIN STILL STR BOURBON</td><td>3</td><td>29.25</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>CEDAR RIDGE VINEYARDS LL</td><td>CEDAR RIDGE BARREL PROOF</td><td>30</td><td>1035</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>CEDAR RIDGE VINEYARDS LL</td><td>CEDAR RIDGE BOURBON</td><td>120</td><td>3361.2</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>EARLY TIMES BOTTLE IN BOND</td><td>1</td><td>18.75</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>E &amp; J GALLO WINERY</td><td>FOUR ROSES SMALL BATCH</td><td>2</td><td>55.5</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>E &amp; J GALLO WINERY</td><td>FOUR ROSES SMALL BATCH SELECT</td><td>1</td><td>45</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>HANDY &amp; SCHILLER TRIPLE OAKED OLD FASHIONED</td><td>1</td><td>22.5</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>HEAVEN HILL BOTTLED-IN-BOND DOUBLE MASH</td><td>6</td><td>247.5</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>HEAVEN HILL BOTTLED-IN-BOND DOUBLE MASH</td><td>6</td><td>247.5</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>JIM BEAM</td><td>12</td><td>243</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>JIM BEAM MINI</td><td>1</td><td>10.5</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>VINO.COM DBA TOTAL BEVERAGE SOLUTION</td><td>JOSEPH MAGNUS CIGAR BLEND BOURBON</td><td>2</td><td>300.72</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>KNOB CREEK</td><td>1</td><td>31.5</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>LARCENY SMALL BATCH</td><td>1</td><td>22.5</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>MAKERS 46</td><td>1</td><td>30</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>MAKERS MARK</td><td>1</td><td>27</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>MAKERS MARK</td><td>12</td><td>405</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>BROWN FORMAN CORP.</td><td>OLD FORESTER 1910</td><td>1</td><td>43.5</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>OLD GRAND DAD 114PRF</td><td>6</td><td>124.56</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>PERNOD RICARD USA</td><td>RABBIT HOLE DARERINGER SHERY BOURBON CASK</td><td>1</td><td>59.97</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>TEN HIGH</td><td>12</td><td>73.8</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>CAMPARI AMERICA</td><td>WILD TURKEY 81</td><td>1</td><td>18.75</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BROWN FORMAN CORP.</td><td>WOODFORD RESERVE</td><td>12</td><td>439.8</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>BROWN FORMAN CORP.</td><td>WOODFORD RESERVE DOUBLE OAKED</td><td>1</td><td>48.75</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BROWN FORMAN CORP.</td><td>WOODFORD RESERVE DOUBLE OAKED</td><td>12</td><td>585</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>ELIJAH CRAIG RYE</td><td>1</td><td>27</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>NEW RIFF DISTILLING</td><td>HA NEW RIFF SHERRY FINISHED MALTED RYE</td><td>1</td><td>52.49</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>NEW RIFF DISTILLING</td><td>HA NEW RIFF SHERRY FINISHED MALTED RYE</td><td>2</td><td>104.98</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>CHATHAM IMPORTS INC</td><td>MICHTERS US*1 SINGLE BARREL RYE WHISKEY</td><td>1</td><td>36.75</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>OLD OVERHOLT RYE</td><td>4</td><td>69.24</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>RITTENHOUSE RYE WHISKEY</td><td>12</td><td>252</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>GOAMERICAGO BEVERAGES LLC / WHISTLEPIG</td><td>WHISTLEPIG 10YR</td><td>3</td><td>180</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>GOAMERICAGO BEVERAGES LLC / WHISTLEPIG</td><td>WHISTLEPIG 6YR PIGGYBACK RYE</td><td>4</td><td>150</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>CAMPARI AMERICA</td><td>WILD TURKEY 101 RYE</td><td>1</td><td>22.5</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BROWN FORMAN CORP.</td><td>WOODFORD RESERVE RYE</td><td>3</td><td>109.95</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>MHW LTD</td><td>BARRELL BOURBON FDN/DBL/SEA  GIFT BOX 2026</td><td>8</td><td>276.64</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>MHW LTD</td><td>BARRELL BOURBON FDN/DBL/SEA  GIFT BOX 2026</td><td>8</td><td>276.64</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>MHW LTD</td><td>BARRELL BOURBON NEW YEAR 2027</td><td>6</td><td>369</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>PARK STREET IMPORTS</td><td>CASA MAESTRI DUBAI PISTACHIO CHOCOLATE CREAM</td><td>6</td><td>134.94</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>CROWN ROYAL CHOCOLATE</td><td>48</td><td>1259.52</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>CROWN ROYAL CHOCOLATE</td><td>1</td><td>26.24</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>ELIJAH CRAIG SMALL BATCH W/ROCKS GLASS &amp; SYRUP</td><td>3</td><td>81</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>FIREBALL TORCH&#x27;D VANILLA PET</td><td>1</td><td>13.5</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>BROWN FORMAN CORP.</td><td>GLENDRONACH 12YR ORIGINAL</td><td>1</td><td>51</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>HARD TRUTH DISTILLING COMPANY LLC</td><td>HARD TRUTH BFR WHEATED BOURBON MIZUNARA</td><td>1</td><td>52.5</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>SPIRITS INNOVATION PARTNERS TEQUILA, LLC</td><td>INSOLITO REPOSADO 100% BLUE AGAVE TEQUILA</td><td>1</td><td>37.49</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>KOVAL DISTILLERY</td><td>KOVAL CRANBERRY GIN LIQUEUR</td><td>6</td><td>162</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>ON THE ROCKS CHOCOLATE MARTINI</td><td>1</td><td>9.75</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>LUXCO INC</td><td>PENELOPE F CANCER 5TH EDITION</td><td>1</td><td>60</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>CHARLES JACQUIN ET CIE</td><td>PENNSYLVANIA DUTCH EGG NOG</td><td>3</td><td>24.75</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>CEDAR RIDGE VINEYARDS LL</td><td>QUINTESSENTIAL SPECIAL RELEASE - PETE AND SHERRI 2ND ANNIVER</td><td>1</td><td>71.25</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>AIKO IMPORTERS INC</td><td>RETRIEVERS RESERVE</td><td>1</td><td>57.51</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>RYANS SMORES</td><td>4</td><td>40.2</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>RYANS SMORES MINI</td><td>2</td><td>17.64</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>PARK STREET IMPORTS</td><td>SHANKYS WHIP THE GOLDEN OSTRICH</td><td>1</td><td>29.99</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>PARK STREET IMPORTS</td><td>SHANKYS WHIP THE GOLDEN OSTRICH</td><td>1</td><td>29.99</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>AIKO IMPORTERS INC</td><td>TURKEY TOM</td><td>1</td><td>97.5</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>BROWN FORMAN CORP.</td><td>WOODFORD RESERVE MASTER COLLECTION SUPER SEASONED OAK</td><td>3</td><td>404.97</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BROWN FORMAN CORP.</td><td>GENTLEMAN JACK</td><td>4</td><td>120.08</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>GEORGE DICKEL #8</td><td>2</td><td>33</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>BROWN FORMAN CORP.</td><td>JACK DANIELS OLD #7 BLACK LABEL</td><td>2</td><td>60.82</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BROWN FORMAN CORP.</td><td>JACK DANIELS OLD #7 BLACK LABEL</td><td>36</td><td>1094.76</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>BROWN FORMAN CORP.</td><td>JACK DANIELS TENNESSEE HONEY</td><td>1</td><td>23.87</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BROWN FORMAN CORP.</td><td>JACK DANIELS TENNESSEE HONEY</td><td>12</td><td>364.92</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>OLE SMOKY DISTILLERY LLC</td><td>OLE SMOKY BLACKBERRY WHISKEY</td><td>6</td><td>90</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>OLE SMOKY DISTILLERY LLC</td><td>OLE SMOKY BLACKBERRY WHISKEY</td><td>6</td><td>90</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>OLE SMOKY DISTILLERY LLC</td><td>OLE SMOKY COOKIE DOUGH WHISKEY</td><td>3</td><td>45</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>OLE SMOKY DISTILLERY LLC</td><td>OLE SMOKY COOKIE DOUGH WHISKEY</td><td>6</td><td>90</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>OLE SMOKY DISTILLERY LLC</td><td>OLE SMOKY MINT CHOCOLATE CHIP CREAM WHISKEY</td><td>2</td><td>30</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>OLE SMOKY DISTILLERY LLC</td><td>OLE SMOKY MINT CHOCOLATE CHIP CREAM WHISKEY</td><td>6</td><td>90</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>OLE SMOKY DISTILLERY LLC</td><td>OLE SMOKY SALTY WATERMELON WHISKEY</td><td>6</td><td>90</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>MONTEZUMA TRIPLE SEC</td><td>48</td><td>165.6</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>LUXCO INC</td><td>PARAMOUNT TRIPLE SEC</td><td>120</td><td>736.8</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>FIREBALL CINNAMON WHISKEY</td><td>36</td><td>648</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>SHEEP DOG PEANUT BUTTER BANANA</td><td>4</td><td>51</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>SOUTHERN COMFORT</td><td>1</td><td>15.5</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>BACARDI USA INC</td><td>BACARDI SUPERIOR</td><td>1</td><td>13.49</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BACARDI USA INC</td><td>BACARDI SUPERIOR</td><td>24</td><td>342</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>SAZERAC COMPANY  INC</td><td>BARTON LIGHT RUM</td><td>24</td><td>162</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BLUE OX SPIRITS, INC.</td><td>BLUE OX SILVER RUM</td><td>12</td><td>98.64</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>JIM BEAM BRANDS</td><td>CRUZAN LIGHT</td><td>12</td><td>135</td></tr>
-<tr><td>2026-09-28</td><td>WESTSIDE SPIRITS / CEDAR RAPIDS</td><td>CEDAR RAPIDS</td><td>SERRALLES USA</td><td>DON Q CRISTAL</td><td>1</td><td>13.14</td></tr>
-<tr><td>2026-09-28</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>LUXURY SPIRITS INTERNATIONAL LLC</td><td>FLOR DE CANA EXTRA DRY LIGHT</td><td>4</td><td>63.72</td></tr>
-</tbody></table>
   
+  <div class="scroll"><table><thead><tr><th data-type="text">Date</th><th data-type="text">Store Name</th><th data-type="text">City</th><th data-type="text">Vendor Name</th><th data-type="text">Item</th><th data-type="num" class="num">Bottles Sold</th><th data-type="num" class="num">Sale ($)</th></tr></thead><tbody>
+<tr><td colspan="7">No matching records found.</td></tr>
+</tbody></table></div>
+  <h2>Most recent matching records in the dataset</h2><p class="note">Nothing matched inside the report window, so these are the newest matches the state has published so far.</p><div class="scroll"><table><thead><tr><th data-type="text">Date</th><th data-type="text">Store Name</th><th data-type="text">City</th><th data-type="text">Vendor Name</th><th data-type="text">Item</th><th data-type="num" class="num">Bottles Sold</th><th data-type="num" class="num">Sale ($)</th></tr></thead><tbody>
+<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>CASAMIGOS REPOSADO</td><td class="num" data-v="6.0">6</td><td class="num" data-v="256.44">256.44</td></tr>
+<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>E &amp; J GALLO WINERY</td><td>DON FULANO ANEJO</td><td class="num" data-v="2.0">2</td><td class="num" data-v="135.0">135</td></tr>
+<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>E &amp; J GALLO WINERY</td><td>DON FULANO REPOSADO</td><td class="num" data-v="1.0">1</td><td class="num" data-v="52.5">52.5</td></tr>
+<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>DON JULIO ANEJO</td><td class="num" data-v="6.0">6</td><td class="num" data-v="323.94">323.94</td></tr>
+<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>DON JULIO BLANCO</td><td class="num" data-v="12.0">12</td><td class="num" data-v="557.88">557.88</td></tr>
+<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>DIAGEO AMERICAS</td><td>DON JULIO REPOSADO</td><td class="num" data-v="6.0">6</td><td class="num" data-v="301.44">301.44</td></tr>
+<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>LUXCO INC</td><td>EL MAYOR BLANCO</td><td class="num" data-v="12.0">12</td><td class="num" data-v="288.0">288</td></tr>
+<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BROWN FORMAN CORP.</td><td>HERRADURA ULTRA ANEJO</td><td class="num" data-v="6.0">6</td><td class="num" data-v="297.0">297</td></tr>
+<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>HEAVEN HILL BRANDS</td><td>LUNAZUL BLANCO</td><td class="num" data-v="24.0">24</td><td class="num" data-v="504.0">504</td></tr>
+<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>WILLIAM GRANT &amp; SONS INC</td><td>MILAGRO REPOSADO</td><td class="num" data-v="6.0">6</td><td class="num" data-v="135.0">135</td></tr>
+<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>WILLIAM GRANT &amp; SONS INC</td><td>MILAGRO SILVER</td><td class="num" data-v="18.0">18</td><td class="num" data-v="405.0">405</td></tr>
+<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>WILLIAM GRANT &amp; SONS INC</td><td>MILAGRO SILVER</td><td class="num" data-v="18.0">18</td><td class="num" data-v="405.0">405</td></tr>
+<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BACARDI USA INC</td><td>PATRON ANEJO</td><td class="num" data-v="2.0">2</td><td class="num" data-v="90.0">90</td></tr>
+<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>BACARDI USA INC</td><td>PATRON SILVER</td><td class="num" data-v="24.0">24</td><td class="num" data-v="899.76">899.76</td></tr>
+<tr><td>2026-09-30</td><td>BENZ DISTRIBUTING</td><td>CEDAR RAPIDS</td><td>MAST-JAGERMEISTER US, INC</td><td>TEREMANA BLANCO TEQUILA</td><td class="num" data-v="6.0">6</td><td class="num" data-v="143.22">143.22</td></tr>
+</tbody></table></div>
+<script>
+(function () {
+  var table = document.getElementById('data');
+  if (!table) return;
+  var tbody = table.tBodies[0];
+  var rows = Array.prototype.slice.call(tbody.rows);
+  var search = document.getElementById('search');
+  var count = document.getElementById('count');
+  var heads = table.tHead.rows[0].cells;
+  var dir = {};
+
+  function update() {
+    var q = search.value.toLowerCase();
+    var shown = 0;
+    rows.forEach(function (r) {
+      var ok = r.textContent.toLowerCase().indexOf(q) !== -1;
+      r.style.display = ok ? '' : 'none';
+      if (ok) shown++;
+    });
+    count.textContent = 'Showing ' + shown + ' of ' + rows.length + ' rows';
+  }
+  search.addEventListener('input', update);
+
+  Array.prototype.forEach.call(heads, function (th, i) {
+    th.addEventListener('click', function () {
+      var num = th.getAttribute('data-type') === 'num';
+      dir[i] = dir[i] === 'asc' ? 'desc' : 'asc';
+      var mult = dir[i] === 'asc' ? 1 : -1;
+      rows.sort(function (a, b) {
+        var x = a.cells[i], y = b.cells[i];
+        var xv = num ? parseFloat(x.getAttribute('data-v')) : x.textContent.toLowerCase();
+        var yv = num ? parseFloat(y.getAttribute('data-v')) : y.textContent.toLowerCase();
+        return xv < yv ? -mult : (xv > yv ? mult : 0);
+      });
+      rows.forEach(function (r) { tbody.appendChild(r); });
+      Array.prototype.forEach.call(heads, function (h) { h.removeAttribute('data-sort'); });
+      th.setAttribute('data-sort', dir[i]);
+    });
+  });
+  update();
+})();
+</script>
 </body>
 </html>
