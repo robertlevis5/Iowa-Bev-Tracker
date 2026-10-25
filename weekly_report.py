@@ -43,9 +43,9 @@ KEYWORDS = [
     "Benz Distributing",
 ]
 
-# Look back this many days from today. 28 covers the ~2 week reporting lag
-# plus a couple of weeks of data. Raise it if you want a longer history.
-LOOKBACK_DAYS = 28
+# Look back this many days from today. 21 covers the ~2 week reporting lag
+# plus about a week of data. Raise it if you want a longer history.
+LOOKBACK_DAYS = 21
 
 # If nothing falls in the window, show this many of the newest matches.
 FALLBACK_ROWS = 15
@@ -295,17 +295,145 @@ def esc(v):
     return html.escape(str(v)) if v is not None else ""
 
 
-def table_html(rows):
-    header = "".join(f"<th>{label}</th>" for _, label in REPORT_COLUMNS)
+NUMERIC_KEYS = {"bottles_sold", "sale_dollars"}
+
+
+def to_number(v):
+    try:
+        return float(re.sub(r"[^0-9.\-]", "", str(v)) or 0)
+    except ValueError:
+        return 0.0
+
+
+def summarize(rows, key):
+    """Totals per store or vendor, grouped on a normalized name so small
+    spelling/case/spacing differences merge. Sorted by dollars, highest first."""
+    agg = {}
+    for r in rows:
+        raw_name = (r.get(key) or "").strip() or "(blank)"
+        a = agg.setdefault(norm_text(raw_name),
+                           {"name": raw_name, "rows": 0, "bottles": 0.0, "dollars": 0.0})
+        a["rows"] += 1
+        a["bottles"] += to_number(r.get("bottles_sold"))
+        a["dollars"] += to_number(r.get("sale_dollars"))
+    return sorted(agg.values(), key=lambda a: a["dollars"], reverse=True)
+
+
+def summary_html(title, items, label):
+    body = "".join(
+        f"<tr><td>{esc(a['name'])}</td><td class=\"num\">{a['rows']:,}</td>"
+        f"<td class=\"num\">{a['bottles']:,.0f}</td>"
+        f"<td class=\"num\">${a['dollars']:,.2f}</td></tr>"
+        for a in items
+    )
+    total_rows = sum(a["rows"] for a in items)
+    total_bottles = sum(a["bottles"] for a in items)
+    total_dollars = sum(a["dollars"] for a in items)
+    return (
+        f"<div class=\"summary\"><h2>{esc(title)}</h2>"
+        f"<div class=\"scroll\"><table><thead><tr><th>{esc(label)}</th><th class=\"num\">Rows</th>"
+        f"<th class=\"num\">Bottles</th><th class=\"num\">Sales ($)</th></tr></thead>"
+        f"<tbody>{body}</tbody>"
+        f"<tfoot><tr><td>Total</td><td class=\"num\">{total_rows:,}</td>"
+        f"<td class=\"num\">{total_bottles:,.0f}</td>"
+        f"<td class=\"num\">${total_dollars:,.2f}</td></tr></tfoot>"
+        f"</table></div></div>"
+    )
+
+
+def table_html(rows, table_id=None):
+    """Data table. With table_id, headers are click-to-sort (see PAGE_JS)."""
+    header_cells = []
+    for key, label in REPORT_COLUMNS:
+        kind = "num" if key in NUMERIC_KEYS else "text"
+        cls = ' class="num"' if kind == "num" else ""
+        header_cells.append(f'<th data-type="{kind}"{cls}>{label}</th>')
+    header = "".join(header_cells)
+
     body_rows = []
     for r in rows:
-        cells = "".join(f"<td>{esc(r.get(key))}</td>" for key, _ in REPORT_COLUMNS)
-        body_rows.append(f"<tr>{cells}</tr>")
+        cells = []
+        for key, _ in REPORT_COLUMNS:
+            val = r.get(key)
+            if key in NUMERIC_KEYS:
+                cells.append(f'<td class="num" data-v="{to_number(val)}">{esc(val)}</td>')
+            else:
+                cells.append(f"<td>{esc(val)}</td>")
+        body_rows.append("<tr>" + "".join(cells) + "</tr>")
     body = "\n".join(body_rows) if body_rows else (
         f'<tr><td colspan="{len(REPORT_COLUMNS)}">No matching records found.</td></tr>'
     )
-    return (f"<table><thead><tr>{header}</tr></thead>"
-            f"<tbody>\n{body}\n</tbody></table>")
+    id_attr = f' id="{table_id}"' if table_id else ""
+    return (f'<div class="scroll"><table{id_attr}><thead><tr>{header}</tr></thead>'
+            f"<tbody>\n{body}\n</tbody></table></div>")
+
+
+PAGE_CSS = """
+  body { font-family: Arial, sans-serif; margin: 2rem; color: #222; }
+  h1 { font-size: 1.4rem; }
+  h2 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; }
+  .meta { color: #555; margin-bottom: 1.5rem; line-height: 1.6; }
+  .note { color: #555; }
+  .summaries { display: flex; flex-wrap: wrap; gap: 2rem; }
+  .summary { flex: 1 1 340px; min-width: 0; }
+  .scroll { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { border: 1px solid #ccc; padding: 6px 10px; font-size: 0.9rem; text-align: left; }
+  th { background: #f2f2f2; }
+  tfoot td { font-weight: bold; background: #f2f2f2; }
+  tr:nth-child(even) { background: #fafafa; }
+  .num { text-align: right; }
+  #data th { cursor: pointer; user-select: none; }
+  #data th:hover { background: #e6e6e6; }
+  #data th[data-sort="asc"]::after { content: " \\25B2"; font-size: 0.7em; }
+  #data th[data-sort="desc"]::after { content: " \\25BC"; font-size: 0.7em; }
+  .tools { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin: 0.5rem 0 0.75rem; }
+  #search { padding: 6px 10px; font-size: 0.95rem; width: 100%; max-width: 320px; border: 1px solid #aaa; border-radius: 4px; }
+  #count { color: #555; font-size: 0.9rem; }
+"""
+
+PAGE_JS = """
+(function () {
+  var table = document.getElementById('data');
+  if (!table) return;
+  var tbody = table.tBodies[0];
+  var rows = Array.prototype.slice.call(tbody.rows);
+  var search = document.getElementById('search');
+  var count = document.getElementById('count');
+  var heads = table.tHead.rows[0].cells;
+  var dir = {};
+
+  function update() {
+    var q = search.value.toLowerCase();
+    var shown = 0;
+    rows.forEach(function (r) {
+      var ok = r.textContent.toLowerCase().indexOf(q) !== -1;
+      r.style.display = ok ? '' : 'none';
+      if (ok) shown++;
+    });
+    count.textContent = 'Showing ' + shown + ' of ' + rows.length + ' rows';
+  }
+  search.addEventListener('input', update);
+
+  Array.prototype.forEach.call(heads, function (th, i) {
+    th.addEventListener('click', function () {
+      var num = th.getAttribute('data-type') === 'num';
+      dir[i] = dir[i] === 'asc' ? 'desc' : 'asc';
+      var mult = dir[i] === 'asc' ? 1 : -1;
+      rows.sort(function (a, b) {
+        var x = a.cells[i], y = b.cells[i];
+        var xv = num ? parseFloat(x.getAttribute('data-v')) : x.textContent.toLowerCase();
+        var yv = num ? parseFloat(y.getAttribute('data-v')) : y.textContent.toLowerCase();
+        return xv < yv ? -mult : (xv > yv ? mult : 0);
+      });
+      rows.forEach(function (r) { tbody.appendChild(r); });
+      Array.prototype.forEach.call(heads, function (h) { h.removeAttribute('data-sort'); });
+      th.setAttribute('data-sort', dir[i]);
+    });
+  });
+  update();
+})();
+"""
 
 
 def build_html_report(result, keywords):
@@ -313,48 +441,49 @@ def build_html_report(result, keywords):
     keyword_list = ", ".join(esc(k) for k in keywords)
     rows = result["rows"]
 
-    fallback_section = ""
-    if not rows:
+    if rows:
+        summaries = (
+            '<div class="summaries">'
+            + summary_html("Totals by store", summarize(rows, "store_name"), "Store")
+            + summary_html("Totals by vendor", summarize(rows, "vendor_name"), "Vendor")
+            + "</div>"
+        )
+        main_section = (
+            "<h2>All matching records</h2>"
+            '<div class="tools"><input id="search" type="search" '
+            'placeholder="Search store, vendor, item, city..." aria-label="Search records">'
+            '<span id="count"></span></div>'
+            '<p class="note">Click a column heading to sort.</p>'
+            + table_html(rows, table_id="data")
+        )
+        fallback_section = ""
+    else:
+        summaries = ""
+        main_section = table_html(rows)
         fallback_section = (
             "<h2>Most recent matching records in the dataset</h2>"
-            "<p class=\"note\">Nothing matched inside the report window, so "
+            '<p class="note">Nothing matched inside the report window, so '
             "these are the newest matches the state has published so far.</p>"
             + table_html(result["fallback"])
         )
 
-    return f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Iowa Liquor Sales Keyword Report — {today_str}</title>
-<style>
-  body {{ font-family: Arial, sans-serif; margin: 2rem; color: #222; }}
-  h1 {{ font-size: 1.4rem; }}
-  h2 {{ font-size: 1.1rem; margin-top: 2rem; }}
-  .meta {{ color: #555; margin-bottom: 1.5rem; line-height: 1.6; }}
-  .note {{ color: #555; }}
-  table {{ border-collapse: collapse; width: 100%; }}
-  th, td {{ border: 1px solid #ccc; padding: 6px 10px; font-size: 0.9rem; text-align: left; }}
-  th {{ background: #f2f2f2; }}
-  tr:nth-child(even) {{ background: #fafafa; }}
-</style>
-</head>
-<body>
-  <h1>Iowa Liquor Sales Keyword Report</h1>
-  <div class="meta">
-    Generated {today_str}<br>
-    Keywords: {keyword_list}<br>
-    Window: {esc(result["window_start"])} to today &middot; {len(rows)} matching row(s)<br>
-    Newest date in state data: {esc(result["newest_date"])} &middot;
-    {result["total_rows"]:,} rows scanned &middot;
-    {result["total_matches"]:,} total keyword matches this year
-  </div>
-  {table_html(rows)}
-  {fallback_section}
-</body>
-</html>
-"""
+    return (
+        "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n"
+        "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
+        f"<title>Iowa Liquor Sales Keyword Report — {today_str}</title>\n"
+        f"<style>{PAGE_CSS}</style>\n</head>\n<body>\n"
+        "  <h1>Iowa Liquor Sales Keyword Report</h1>\n"
+        "  <div class=\"meta\">\n"
+        f"    Generated {today_str}<br>\n"
+        f"    Keywords: {keyword_list}<br>\n"
+        f"    Window: {esc(result['window_start'])} to today &middot; {len(rows):,} matching row(s)<br>\n"
+        f"    Newest date in state data: {esc(result['newest_date'])} &middot; "
+        f"{result['total_rows']:,} rows scanned &middot; "
+        f"{result['total_matches']:,} total keyword matches this year\n"
+        "  </div>\n"
+        f"  {summaries}\n  {main_section}\n  {fallback_section}\n"
+        f"<script>{PAGE_JS}</script>\n</body>\n</html>\n"
+    )
 
 
 def write_csv(rows, path):
