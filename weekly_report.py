@@ -3,15 +3,16 @@
 Weekly Iowa Liquor Sales keyword report.
 
 Downloads the current year's full Iowa Liquor Sales CSV from the Iowa Data
-Hub (idh-be.iowa.gov) and filters locally for rows in the last 7 days where
-the Store Name or Vendor Name matches any of the target keywords, then
-writes an HTML + CSV report.
+Hub (idh-be.iowa.gov) and filters locally for rows where the Store Name or
+Vendor Name matches any target keyword, then writes an HTML + CSV report.
 
-Note: Iowa's open-data platform migrated in 2026 from the old Socrata-based
-data.iowa.gov API (which supported server-side filtering) to a new "Iowa
-Data Hub" platform that only offers full-file downloads, split one dataset
-per calendar year. This script downloads the whole year's file and filters
-it in Python instead of filtering server-side.
+Notes:
+- Iowa's open-data platform migrated in 2026 to a new "Iowa Data Hub" that
+  only offers full-file downloads, one dataset per calendar year, so this
+  script downloads the whole file and filters it in Python.
+- The state publishes this data with roughly a two-week lag, so the report
+  looks back LOOKBACK_DAYS from today (not just 7), and if that window is
+  empty it shows the most recent matching records instead.
 """
 
 import csv
@@ -19,20 +20,15 @@ import datetime as dt
 import html
 import io
 import os
+import re
 import sys
-import urllib.request
 import urllib.error
+import urllib.request
 
 # ---- Configuration -------------------------------------------------------
 
-# Iowa's open-data platform (Iowa Data Hub) publishes this dataset as one
-# full CSV per calendar year, at a numeric dataset ID that increments each
-# year the dataset is re-published. Known IDs so far:
-#   2024 -> 1261
-#   2025 -> 1262
-# We try the current year's likely ID first (guessed from the pattern), and
-# fall back to nearby IDs / last year's if that guess is wrong, printing
-# clear diagnostics either way so this is easy to fix if IDs shift again.
+# Known dataset IDs per year on the Iowa Data Hub:
+#   2024 -> 1261, 2025 -> 1262 (later years are guessed from the pattern)
 KNOWN_YEAR_DATASET_IDS = {
     2024: 1261,
     2025: 1262,
@@ -45,21 +41,47 @@ KEYWORDS = [
     "Benz Distributing",
 ]
 
-# How many days back to look. 7 covers "since last week's report."
-DAYS_BACK = 7
+# Look back this many days from today. 28 covers the ~2 week reporting lag
+# plus a couple of weeks of data. Raise it if you want a longer history.
+LOOKBACK_DAYS = 28
+
+# If nothing falls in the window, show this many of the newest matches.
+FALLBACK_ROWS = 15
 
 OUTPUT_DIR = "reports"
 
+# Our standard field name -> acceptable CSV header names (compared after
+# lowercasing and stripping spaces/punctuation, so "Store Name", "store_name"
+# and "STORE NAME" all match "storename").
+FIELD_ALIASES = {
+    "date": ["date"],
+    "store_name": ["storename", "name"],
+    "city": ["city"],
+    "vendor_name": ["vendorname", "vendor"],
+    "item_description": ["itemdescription", "itemname", "item"],
+    "bottles_sold": ["bottlessold"],
+    "sale_dollars": ["saledollars", "sale"],
+}
+REQUIRED_FIELDS = ["date", "store_name", "vendor_name"]
+
+REPORT_COLUMNS = [
+    ("date", "Date"),
+    ("store_name", "Store Name"),
+    ("city", "City"),
+    ("vendor_name", "Vendor Name"),
+    ("item_description", "Item"),
+    ("bottles_sold", "Bottles Sold"),
+    ("sale_dollars", "Sale ($)"),
+]
+
+
+# ---- Download --------------------------------------------------------------
 
 def guess_dataset_id_for_year(year):
     if year in KNOWN_YEAR_DATASET_IDS:
         return KNOWN_YEAR_DATASET_IDS[year]
-    # Extrapolate forward from the most recent known year, assuming IDs
-    # increment by 1 per year (true for 2024->2025). This is a guess and
-    # is verified by actually trying the download below.
     last_known_year = max(KNOWN_YEAR_DATASET_IDS)
-    offset = year - last_known_year
-    return KNOWN_YEAR_DATASET_IDS[last_known_year] + offset
+    return KNOWN_YEAR_DATASET_IDS[last_known_year] + (year - last_known_year)
 
 
 def fetch_csv_text(dataset_id):
@@ -67,8 +89,7 @@ def fetch_csv_text(dataset_id):
     req = urllib.request.Request(url)
     req.add_header(
         "User-Agent",
-        "Mozilla/5.0 (compatible; weekly-report-script/1.0; "
-        "+https://github.com/)",
+        "Mozilla/5.0 (compatible; weekly-report-script/1.0; +https://github.com/)",
     )
     req.add_header("Accept", "text/csv")
     with urllib.request.urlopen(req, timeout=180) as resp:
@@ -77,24 +98,15 @@ def fetch_csv_text(dataset_id):
 
 
 def fetch_current_year_csv():
-    """Try the guessed dataset ID for the current year; fall back to a
-    small range of nearby IDs if the guess is off, and print exactly what
-    was tried so it's easy to fix if this breaks again."""
     year = dt.date.today().year
-    candidates = []
     guessed = guess_dataset_id_for_year(year)
-    candidates.append((year, guessed))
-    # Also try a couple of IDs just above/below in case the guess is off
-    # by one (e.g. if Iowa published this year's dataset out of strict
-    # numeric order).
-    for delta in (1, -1, 2, -2):
-        candidates.append((year, guessed + delta))
+    candidates = [guessed] + [guessed + d for d in (1, -1, 2, -2)]
 
     errors = []
-    for yr, ds_id in candidates:
+    for ds_id in candidates:
         url = BASE_URL.format(id=ds_id)
         try:
-            print(f"Trying dataset id {ds_id} for year {yr}: {url}")
+            print(f"Trying dataset id {ds_id} for year {year}: {url}")
             text = fetch_csv_text(ds_id)
             print(f"Success: dataset id {ds_id} returned {len(text)} chars")
             return text, ds_id
@@ -105,93 +117,178 @@ def fetch_current_year_csv():
             errors.append(f"  id {ds_id}: {e}")
 
     raise RuntimeError(
-        "Could not find the current year's Iowa Liquor Sales dataset. "
-        "Tried:\n" + "\n".join(errors) +
-        "\n\nThe dataset ID may need to be updated by hand in "
-        "KNOWN_YEAR_DATASET_IDS -- check "
-        "https://data.iowa.gov/catalog?search=iowa+liquor+sales "
-        "for the current year's dataset and its numeric ID."
+        "Could not find the current year's Iowa Liquor Sales dataset. Tried:\n"
+        + "\n".join(errors)
+        + "\n\nUpdate KNOWN_YEAR_DATASET_IDS by hand -- check "
+        "https://data.iowa.gov/catalog for the current year's dataset ID."
     )
 
 
-def row_matches_keywords(row, keywords):
-    store = (row.get("Store Name") or "").upper()
-    vendor = (row.get("Vendor Name") or "").upper()
+# ---- Parsing and matching --------------------------------------------------
+
+def norm_header(s):
+    return re.sub(r"[^a-z0-9]", "", (s or "").lower())
+
+
+def detect_columns(headers):
+    """Map our standard field names to the CSV's actual header names."""
+    by_norm = {}
+    for h in headers:
+        by_norm.setdefault(norm_header(h), h)
+    colmap = {}
+    for field, aliases in FIELD_ALIASES.items():
+        for alias in aliases:
+            if alias in by_norm:
+                colmap[field] = by_norm[alias]
+                break
+    return colmap
+
+
+def norm_text(s):
+    return " ".join((s or "").upper().split())
+
+
+def matches_keywords(store, vendor, keywords):
+    store_n, vendor_n = norm_text(store), norm_text(vendor)
     for kw in keywords:
-        kw_upper = kw.upper()
-        if kw_upper in store or kw_upper in vendor:
+        kw_n = norm_text(kw)
+        if kw_n in store_n or kw_n in vendor_n:
             return True
     return False
 
 
 def parse_date(value):
-    # Iowa liquor sales CSVs use MM/DD/YYYY dates.
-    for fmt in ("%m/%d/%Y", "%Y-%m-%d"):
+    if not value:
+        return None
+    v = value.strip()
+    for fmt in ("%m/%d/%Y", "%Y-%m-%d", "%m/%d/%Y %I:%M:%S %p"):
         try:
-            return dt.datetime.strptime(value.strip(), fmt).date()
-        except (ValueError, AttributeError):
+            return dt.datetime.strptime(v, fmt).date()
+        except ValueError:
             continue
-    return None
+    try:
+        return dt.date.fromisoformat(v[:10])
+    except ValueError:
+        return None
 
 
 def fetch_rows():
     csv_text, dataset_id = fetch_current_year_csv()
     reader = csv.DictReader(io.StringIO(csv_text))
+    headers = reader.fieldnames or []
+    print(f"CSV columns found: {headers}")
 
-    cutoff = dt.date.today() - dt.timedelta(days=DAYS_BACK)
-    matches = []
-    for row in reader:
-        row_date = parse_date(row.get("Date", ""))
-        if row_date is None or row_date < cutoff:
+    colmap = detect_columns(headers)
+    print(f"Column mapping: {colmap}")
+    missing = [f for f in REQUIRED_FIELDS if f not in colmap]
+    if missing:
+        raise RuntimeError(
+            f"Could not find required column(s) {missing} in the CSV. "
+            f"Actual headers were: {headers}. Update FIELD_ALIASES in "
+            "weekly_report.py to match."
+        )
+
+    total = 0
+    bad_dates = 0
+    sample_bad_date = None
+    newest_date = None
+    all_matches = []
+
+    for raw in reader:
+        total += 1
+        raw_date = raw.get(colmap["date"], "")
+        d = parse_date(raw_date)
+        if d is None:
+            bad_dates += 1
+            if sample_bad_date is None:
+                sample_bad_date = raw_date
             continue
-        if row_matches_keywords(row, KEYWORDS):
-            matches.append(row)
+        if newest_date is None or d > newest_date:
+            newest_date = d
 
-    print(f"Scanned dataset {dataset_id}; {len(matches)} matching row(s) "
-          f"since {cutoff.isoformat()}")
-    return matches, cutoff.isoformat()
+        store = raw.get(colmap["store_name"], "")
+        vendor = raw.get(colmap["vendor_name"], "")
+        if matches_keywords(store, vendor, KEYWORDS):
+            row = {field: raw.get(col, "") for field, col in colmap.items()}
+            row["date"] = d.isoformat()
+            row["_d"] = d
+            all_matches.append(row)
+
+    if total == 0:
+        raise RuntimeError("The CSV downloaded but contained no data rows.")
+    if bad_dates == total:
+        raise RuntimeError(
+            f"Could not parse any dates. Example value: {sample_bad_date!r}. "
+            "Update parse_date() in weekly_report.py."
+        )
+
+    window_start = dt.date.today() - dt.timedelta(days=LOOKBACK_DAYS)
+    in_window = [r for r in all_matches if r["_d"] >= window_start]
+    in_window.sort(key=lambda r: r["_d"], reverse=True)
+    all_matches.sort(key=lambda r: r["_d"], reverse=True)
+
+    print(f"Dataset {dataset_id}: {total} rows scanned "
+          f"({bad_dates} with unreadable dates)")
+    print(f"Newest date in dataset: {newest_date}")
+    print(f"Total keyword matches in file: {len(all_matches)}")
+    print(f"Matches since {window_start.isoformat()}: {len(in_window)}")
+
+    return {
+        "rows": in_window,
+        "fallback": all_matches[:FALLBACK_ROWS] if not in_window else [],
+        "window_start": window_start.isoformat(),
+        "newest_date": newest_date.isoformat() if newest_date else "unknown",
+        "total_rows": total,
+        "total_matches": len(all_matches),
+        "dataset_id": dataset_id,
+    }
 
 
 # ---- Report generation ------------------------------------------------------
 
-REPORT_COLUMNS = [
-    ("Date", "Date"),
-    ("Store Name", "Store Name"),
-    ("City", "City"),
-    ("Vendor Name", "Vendor Name"),
-    ("Item Description", "Item"),
-    ("Bottles Sold", "Bottles Sold"),
-    ("Sale (Dollars)", "Sale ($)"),
-]
+def esc(v):
+    return html.escape(str(v)) if v is not None else ""
 
 
-def build_html_report(rows, start_date, keywords):
-    today_str = dt.date.today().isoformat()
-
-    def esc(v):
-        return html.escape(str(v)) if v is not None else ""
-
-    table_rows = []
+def table_html(rows):
+    header = "".join(f"<th>{label}</th>" for _, label in REPORT_COLUMNS)
+    body_rows = []
     for r in rows:
-        cells = [esc(r.get(col)) for col, _ in REPORT_COLUMNS]
-        table_rows.append("<tr>" + "".join(f"<td>{c}</td>" for c in cells) + "</tr>")
-
-    header_cells = "".join(f"<th>{label}</th>" for _, label in REPORT_COLUMNS)
-    body = "\n".join(table_rows) if table_rows else (
+        cells = "".join(f"<td>{esc(r.get(key))}</td>" for key, _ in REPORT_COLUMNS)
+        body_rows.append(f"<tr>{cells}</tr>")
+    body = "\n".join(body_rows) if body_rows else (
         f'<tr><td colspan="{len(REPORT_COLUMNS)}">No matching records found.</td></tr>'
     )
+    return (f"<table><thead><tr>{header}</tr></thead>"
+            f"<tbody>\n{body}\n</tbody></table>")
 
+
+def build_html_report(result, keywords):
+    today_str = dt.date.today().isoformat()
     keyword_list = ", ".join(esc(k) for k in keywords)
+    rows = result["rows"]
+
+    fallback_section = ""
+    if not rows:
+        fallback_section = (
+            "<h2>Most recent matching records in the dataset</h2>"
+            "<p class=\"note\">Nothing matched inside the report window, so "
+            "these are the newest matches the state has published so far.</p>"
+            + table_html(result["fallback"])
+        )
 
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Iowa Liquor Sales Keyword Report — {today_str}</title>
 <style>
   body {{ font-family: Arial, sans-serif; margin: 2rem; color: #222; }}
   h1 {{ font-size: 1.4rem; }}
-  .meta {{ color: #555; margin-bottom: 1.5rem; }}
+  h2 {{ font-size: 1.1rem; margin-top: 2rem; }}
+  .meta {{ color: #555; margin-bottom: 1.5rem; line-height: 1.6; }}
+  .note {{ color: #555; }}
   table {{ border-collapse: collapse; width: 100%; }}
   th, td {{ border: 1px solid #ccc; padding: 6px 10px; font-size: 0.9rem; text-align: left; }}
   th {{ background: #f2f2f2; }}
@@ -201,27 +298,24 @@ def build_html_report(rows, start_date, keywords):
 <body>
   <h1>Iowa Liquor Sales Keyword Report</h1>
   <div class="meta">
-    Generated {today_str} &middot; Records from {start_date} to today &middot;
-    Keywords: {keyword_list} &middot; {len(rows)} matching row(s)
+    Generated {today_str}<br>
+    Keywords: {keyword_list}<br>
+    Window: {esc(result["window_start"])} to today &middot; {len(rows)} matching row(s)<br>
+    Newest date in state data: {esc(result["newest_date"])} &middot;
+    {result["total_rows"]:,} rows scanned &middot;
+    {result["total_matches"]:,} total keyword matches this year
   </div>
-  <table>
-    <thead><tr>{header_cells}</tr></thead>
-    <tbody>
-      {body}
-    </tbody>
-  </table>
+  {table_html(rows)}
+  {fallback_section}
 </body>
 </html>
 """
 
 
 def write_csv(rows, path):
-    if not rows:
-        fieldnames = [k for k, _ in REPORT_COLUMNS]
-    else:
-        fieldnames = list(rows[0].keys())
+    fieldnames = [k for k, _ in REPORT_COLUMNS]
     with open(path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
         writer.writeheader()
         for r in rows:
             writer.writerow(r)
@@ -229,12 +323,10 @@ def write_csv(rows, path):
 
 def main():
     try:
-        rows, start_date = fetch_rows()
+        result = fetch_rows()
     except Exception as exc:
-        print(f"ERROR fetching data: {exc}", file=sys.stderr)
+        print(f"ERROR: {exc}", file=sys.stderr)
         sys.exit(1)
-
-    print(f"Found {len(rows)} matching row(s)")
 
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     today_str = dt.date.today().isoformat()
@@ -242,12 +334,12 @@ def main():
     csv_path = os.path.join(OUTPUT_DIR, f"report-{today_str}.csv")
     latest_path = os.path.join(OUTPUT_DIR, "latest.html")
 
-    report_html = build_html_report(rows, start_date, KEYWORDS)
+    report_html = build_html_report(result, KEYWORDS)
     with open(html_path, "w", encoding="utf-8") as f:
         f.write(report_html)
     with open(latest_path, "w", encoding="utf-8") as f:
         f.write(report_html)
-    write_csv(rows, csv_path)
+    write_csv(result["rows"] or result["fallback"], csv_path)
 
     print(f"Wrote {html_path}")
     print(f"Wrote {csv_path}")
