@@ -43,9 +43,10 @@ KEYWORDS = [
     "Benz Distributing",
 ]
 
-# Look back this many days from today. 21 covers the ~2 week reporting lag
-# plus about a week of data. Raise it if you want a longer history.
-LOOKBACK_DAYS = 21
+# The report window covers this many days of data, counted back from the NEWEST
+# date the state has published (not from today), because the state's data runs
+# behind. Raise it if you want a longer history.
+LOOKBACK_DAYS = 14
 
 # If nothing falls in the window, show this many of the newest matches.
 FALLBACK_ROWS = 15
@@ -267,7 +268,9 @@ def fetch_rows():
             "Update parse_date() in weekly_report.py."
         )
 
-    window_start = dt.date.today() - dt.timedelta(days=LOOKBACK_DAYS)
+    window_end = newest_date
+    window_start = window_end - dt.timedelta(days=LOOKBACK_DAYS)
+    lag_days = (dt.date.today() - newest_date).days
     in_window = [r for r in all_matches if r["_d"] >= window_start]
     in_window.sort(key=lambda r: r["_d"], reverse=True)
     all_matches.sort(key=lambda r: r["_d"], reverse=True)
@@ -276,12 +279,15 @@ def fetch_rows():
           f"({bad_dates:,} with unreadable dates)")
     print(f"Newest date in dataset: {newest_date}")
     print(f"Total keyword matches in file: {len(all_matches)}")
-    print(f"Matches since {window_start.isoformat()}: {len(in_window)}")
+    print(f"State data is {lag_days} day(s) behind today")
+    print(f"Matches {window_start.isoformat()} to {window_end.isoformat()}: {len(in_window)}")
 
     return {
         "rows": in_window,
         "fallback": all_matches[:FALLBACK_ROWS] if not in_window else [],
         "window_start": window_start.isoformat(),
+        "window_end": window_end.isoformat(),
+        "lag_days": lag_days,
         "newest_date": newest_date.isoformat() if newest_date else "unknown",
         "total_rows": total,
         "total_matches": len(all_matches),
@@ -476,8 +482,10 @@ def build_html_report(result, keywords):
         "  <div class=\"meta\">\n"
         f"    Generated {today_str}<br>\n"
         f"    Keywords: {keyword_list}<br>\n"
-        f"    Window: {esc(result['window_start'])} to today &middot; {len(rows):,} matching row(s)<br>\n"
-        f"    Newest date in state data: {esc(result['newest_date'])} &middot; "
+        f"    Window: {esc(result['window_start'])} to {esc(result['window_end'])} "
+        f"(the latest {LOOKBACK_DAYS} days of state data) &middot; {len(rows):,} matching row(s)<br>\n"
+        f"    Newest date in state data: {esc(result['newest_date'])} "
+        f"({result['lag_days']} days behind today) &middot; "
         f"{result['total_rows']:,} rows scanned &middot; "
         f"{result['total_matches']:,} total keyword matches this year\n"
         "  </div>\n"
