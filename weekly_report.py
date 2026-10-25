@@ -2,8 +2,8 @@
 """
 Weekly Iowa Liquor Sales keyword report.
 
-Downloads the current year's full Iowa Liquor Sales CSV from the Iowa Data
-Hub (idh-be.iowa.gov) and filters locally for rows where the Store Name or
+Downloads the current year's full Iowa Liquor Sales file (a ZIP of CSV
+parts) from the Iowa Data Hub (idh-be.iowa.gov) and filters locally for rows where the Store Name or
 Vendor Name matches any target keyword, then writes an HTML + CSV report.
 
 Notes:
@@ -22,8 +22,10 @@ import io
 import os
 import re
 import sys
+import tempfile
 import urllib.error
 import urllib.request
+import zipfile
 
 # ---- Configuration -------------------------------------------------------
 
@@ -54,13 +56,13 @@ OUTPUT_DIR = "reports"
 # lowercasing and stripping spaces/punctuation, so "Store Name", "store_name"
 # and "STORE NAME" all match "storename").
 FIELD_ALIASES = {
-    "date": ["date"],
+    "date": ["date", "orderedon"],
     "store_name": ["storename", "name"],
-    "city": ["city"],
+    "city": ["city", "storecity"],
     "vendor_name": ["vendorname", "vendor"],
-    "item_description": ["itemdescription", "itemname", "item"],
-    "bottles_sold": ["bottlessold"],
-    "sale_dollars": ["saledollars", "sale"],
+    "item_description": ["itemdescription", "imdesc", "itemname", "item"],
+    "bottles_sold": ["bottlessold", "salesbottles"],
+    "sale_dollars": ["saledollars", "salesdollars", "sale"],
 }
 REQUIRED_FIELDS = ["date", "store_name", "vendor_name"]
 
@@ -84,20 +86,33 @@ def guess_dataset_id_for_year(year):
     return KNOWN_YEAR_DATASET_IDS[last_known_year] + (year - last_known_year)
 
 
-def fetch_csv_text(dataset_id):
+def download_to_file(dataset_id):
+    """Stream the download to a temp file (it is a large ZIP)."""
     url = BASE_URL.format(id=dataset_id)
     req = urllib.request.Request(url)
     req.add_header(
         "User-Agent",
         "Mozilla/5.0 (compatible; weekly-report-script/1.0; +https://github.com/)",
     )
-    req.add_header("Accept", "text/csv")
-    with urllib.request.urlopen(req, timeout=180) as resp:
-        raw = resp.read()
-    return raw.decode("utf-8-sig", errors="replace")
+    tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".download")
+    size = 0
+    try:
+        with urllib.request.urlopen(req, timeout=180) as resp:
+            while True:
+                chunk = resp.read(1024 * 1024)
+                if not chunk:
+                    break
+                tmp.write(chunk)
+                size += len(chunk)
+    except Exception:
+        tmp.close()
+        os.unlink(tmp.name)
+        raise
+    tmp.close()
+    return tmp.name, size
 
 
-def fetch_current_year_csv():
+def fetch_current_year_file():
     year = dt.date.today().year
     guessed = guess_dataset_id_for_year(year)
     candidates = [guessed] + [guessed + d for d in (1, -1, 2, -2)]
@@ -107,9 +122,9 @@ def fetch_current_year_csv():
         url = BASE_URL.format(id=ds_id)
         try:
             print(f"Trying dataset id {ds_id} for year {year}: {url}")
-            text = fetch_csv_text(ds_id)
-            print(f"Success: dataset id {ds_id} returned {len(text)} chars")
-            return text, ds_id
+            path, size = download_to_file(ds_id)
+            print(f"Success: dataset id {ds_id} downloaded {size:,} bytes")
+            return path, ds_id
         except urllib.error.HTTPError as e:
             body = e.read().decode("utf-8", errors="replace")[:300]
             errors.append(f"  id {ds_id}: HTTP {e.code} - {body}")
@@ -122,6 +137,25 @@ def fetch_current_year_csv():
         + "\n\nUpdate KNOWN_YEAR_DATASET_IDS by hand -- check "
         "https://data.iowa.gov/catalog for the current year's dataset ID."
     )
+
+
+def iter_csv_readers(path):
+    """Yield (name, DictReader) for each CSV in the download. The file is a
+    ZIP containing one or more CSV parts; a plain CSV is also handled."""
+    if zipfile.is_zipfile(path):
+        with zipfile.ZipFile(path) as zf:
+            names = sorted(n for n in zf.namelist() if n.lower().endswith(".csv"))
+            if not names:
+                raise RuntimeError(f"ZIP has no CSV files. Contents: {zf.namelist()}")
+            print(f"ZIP contains {len(names)} CSV file(s): {names}")
+            for n in names:
+                with zf.open(n) as raw:
+                    text = io.TextIOWrapper(raw, encoding="utf-8-sig",
+                                            errors="replace", newline="")
+                    yield n, csv.DictReader(text)
+    else:
+        with open(path, "r", encoding="utf-8-sig", errors="replace", newline="") as f:
+            yield os.path.basename(path), csv.DictReader(f)
 
 
 # ---- Parsing and matching --------------------------------------------------
@@ -173,49 +207,60 @@ def parse_date(value):
 
 
 def fetch_rows():
-    csv_text, dataset_id = fetch_current_year_csv()
-    reader = csv.DictReader(io.StringIO(csv_text))
-    headers = reader.fieldnames or []
-    print(f"CSV columns found: {headers}")
-
-    colmap = detect_columns(headers)
-    print(f"Column mapping: {colmap}")
-    missing = [f for f in REQUIRED_FIELDS if f not in colmap]
-    if missing:
-        raise RuntimeError(
-            f"Could not find required column(s) {missing} in the CSV. "
-            f"Actual headers were: {headers}. Update FIELD_ALIASES in "
-            "weekly_report.py to match."
-        )
+    csv.field_size_limit(10_000_000)
+    path, dataset_id = fetch_current_year_file()
 
     total = 0
     bad_dates = 0
     sample_bad_date = None
     newest_date = None
     all_matches = []
+    printed_sample = False
 
-    for raw in reader:
-        total += 1
-        raw_date = raw.get(colmap["date"], "")
-        d = parse_date(raw_date)
-        if d is None:
-            bad_dates += 1
-            if sample_bad_date is None:
-                sample_bad_date = raw_date
-            continue
-        if newest_date is None or d > newest_date:
-            newest_date = d
+    try:
+        for part_name, reader in iter_csv_readers(path):
+            headers = reader.fieldnames or []
+            print(f"[{part_name}] columns: {headers}")
+            colmap = detect_columns(headers)
+            print(f"[{part_name}] column mapping: {colmap}")
+            missing = [f for f in REQUIRED_FIELDS if f not in colmap]
+            if missing:
+                raise RuntimeError(
+                    f"Could not find required column(s) {missing} in {part_name}. "
+                    f"Actual headers were: {headers}. Update FIELD_ALIASES in "
+                    "weekly_report.py to match."
+                )
 
-        store = raw.get(colmap["store_name"], "")
-        vendor = raw.get(colmap["vendor_name"], "")
-        if matches_keywords(store, vendor, KEYWORDS):
-            row = {field: raw.get(col, "") for field, col in colmap.items()}
-            row["date"] = d.isoformat()
-            row["_d"] = d
-            all_matches.append(row)
+            for raw in reader:
+                total += 1
+                raw_date = raw.get(colmap["date"], "")
+                if not printed_sample:
+                    print(f"Sample date value: {raw_date!r}")
+                    printed_sample = True
+                d = parse_date(raw_date)
+                if d is None:
+                    bad_dates += 1
+                    if sample_bad_date is None:
+                        sample_bad_date = raw_date
+                    continue
+                if newest_date is None or d > newest_date:
+                    newest_date = d
+
+                store = raw.get(colmap["store_name"], "")
+                vendor = raw.get(colmap["vendor_name"], "")
+                if matches_keywords(store, vendor, KEYWORDS):
+                    row = {field: raw.get(col, "") for field, col in colmap.items()}
+                    row["date"] = d.isoformat()
+                    row["_d"] = d
+                    all_matches.append(row)
+    finally:
+        try:
+            os.unlink(path)
+        except OSError:
+            pass
 
     if total == 0:
-        raise RuntimeError("The CSV downloaded but contained no data rows.")
+        raise RuntimeError("The download contained no data rows.")
     if bad_dates == total:
         raise RuntimeError(
             f"Could not parse any dates. Example value: {sample_bad_date!r}. "
@@ -227,8 +272,8 @@ def fetch_rows():
     in_window.sort(key=lambda r: r["_d"], reverse=True)
     all_matches.sort(key=lambda r: r["_d"], reverse=True)
 
-    print(f"Dataset {dataset_id}: {total} rows scanned "
-          f"({bad_dates} with unreadable dates)")
+    print(f"Dataset {dataset_id}: {total:,} rows scanned "
+          f"({bad_dates:,} with unreadable dates)")
     print(f"Newest date in dataset: {newest_date}")
     print(f"Total keyword matches in file: {len(all_matches)}")
     print(f"Matches since {window_start.isoformat()}: {len(in_window)}")
